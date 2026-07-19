@@ -1,0 +1,823 @@
+/* ==========================================================
+   PT SINERGI ASET JAGAT INTEGRASI
+   Main Stylesheet
+   Version : 1.0
+========================================================== */
+
+
+/* ==========================================================
+   ROOT VARIABLES
+========================================================== */
+
+:root{
+
+    /* Color */
+
+    --color-primary:#081B33;
+
+    --color-secondary:#D6A93D;
+
+    --color-white:#FFFFFF;
+
+    --color-black:#000000;
+
+    --color-text:#374151;
+
+    --color-heading:#111827;
+
+    --color-border:#E5E7EB;
+
+    --color-light:#F8F9FB;
+
+    --color-success:#16A34A;
+
+    --color-danger:#DC2626;
+
+
+    /* Typography */
+
+    --font-heading:'Poppins',sans-serif;
+
+    --font-body:'Inter',sans-serif;
+
+
+    /* Container */
+
+    --container-width:1320px;
+
+
+    /* Radius */
+
+    --radius-sm:6px;
+
+    --radius-md:10px;
+
+    --radius-lg:16px;
+
+    --radius-xl:24px;
+
+
+    /* Shadow */
+
+    --shadow-sm:0 5px 15px rgba(0,0,0,.05);
+
+    --shadow-md:0 10px 30px rgba(0,0,0,.08);
+
+    --shadow-lg:0 20px 60px rgba(0,0,0,.12);
+
+
+    /* Transition */
+
+    --transition:.35s ease;
+
+
+    /* Navbar */
+
+    --navbar-height: 84px;
+    --navbar-scroll-height: 72px;
+
+
+    /* Section */
+
+    --section-padding:110px;
+
+
+    /* Z-index */
+
+    --z-header:999;
+
+    --z-overlay:998;
+
+    --z-modal:9999;
+
+}
+
+/* ==========================================================
+   RESET
+========================================================== */
+
+*,
+*::before,
+*::after{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:var(--font-body);
+
+    font-size:16px;
+
+    color:var(--color-text);
+
+    background:var(--color-white);
+
+    line-height:1.7;
+
+    overflow-x:hidden;
+
+}
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+a{
+
+    text-decoration:none;
+
+    transition:var(--transition);
+
+}
+
+ul{
+
+    list-style:none;
+
+}
+
+button{
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+}
+
+input,
+textarea,
+select{
+
+    font-family:inherit;
+
+    outline:none;
+
+}
+
+section{
+
+    position:relative;
+
+    padding:var(--section-padding) 0;
+
+}
+
+.container{
+
+    max-width:1280px;
+    padding:0 24px;
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+
+    font-family:var(--font-heading);
+
+    color:var(--color-heading);
+
+    font-weight:700;
+
+    line-height:1.2;
+
+}
+
+h1{
+
+    font-size:56px;
+
+}
+
+h2{
+
+    font-size:42px;
+
+}
+
+h3{
+
+    font-size:30px;
+
+}
+
+p{
+
+    margin-bottom:0;
+
+}
+
+.btn-primary{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    padding:15px 32px;
+
+    border-radius:var(--radius-md);
+
+    background:var(--color-secondary);
+
+    color:var(--color-white);
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.btn-primary:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.mb-30{
+
+    margin-bottom:30px;
+
+}
+
+.mt-30{
+
+    margin-top:30px;
+
+}
+
+@media(max-width:1200px){
+
+:root{
+
+    --container-width:1140px;
+
+}
+
+}
+
+@media(max-width:992px){
+
+:root{
+
+    --navbar-height:80px;
+
+    --section-padding:90px;
+
+}
+
+h1{
+
+    font-size:46px;
+
+}
+
+h2{
+
+    font-size:36px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+:root{
+
+    --section-padding:70px;
+
+}
+
+h1{
+
+    font-size:38px;
+
+}
+
+h2{
+
+    font-size:30px;
+
+}
+
+.container{
+
+    padding:0 20px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+h1{
+
+    font-size:32px;
+
+}
+
+h2{
+
+    font-size:26px;
+
+}
+
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.header{
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: var(--navbar-height);
+
+    display: flex;
+
+    align-items: center;
+
+    z-index: var(--z-header);
+
+    transition: .35s ease;
+
+    background:transparent;
+
+}
+
+.header.scrolled{
+
+    height: var(--navbar-scroll-height);
+
+    background: rgba(255,255,255,.95);
+
+    backdrop-filter: blur(15px);
+
+    -webkit-backdrop-filter: blur(15px);
+
+    box-shadow: var(--shadow-sm);
+
+    border-bottom:1px solid rgba(0,0,0,.05);
+
+}
+
+.header.scrolled .navbar__link{
+
+    color: var(--color-heading);
+
+}
+
+.header.scrolled .navbar__toggle span{
+
+    background: var(--color-heading);
+
+}
+
+.navbar{
+
+    display:grid;
+
+    grid-template-columns:220px 1fr 220px;
+
+    align-items:center;
+
+    height:100%;
+
+}
+
+.navbar__logo{
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.navbar__logo img{
+    height:58px;
+    width:auto;
+    transition:.35s;
+}
+
+.header.scrolled .navbar__logo img{
+    height:50px;
+}
+
+.navbar__menu{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:52px;
+
+    margin:0;
+
+    padding:0;
+
+}
+
+.navbar__item{
+
+    position:relative;
+
+}
+
+.navbar__link{
+
+    position:relative;
+
+    color:var(--color-white);
+
+    font-size:15px;
+
+    font-weight:500;
+
+    letter-spacing:.3px;
+
+    transition:.3s;
+
+}
+
+.navbar__link::after{
+
+    content:'';
+
+    position:absolute;
+
+    bottom:-10px;
+
+    left:0;
+
+    width:0;
+
+    height:3px;
+
+    border-radius:20px;
+
+    background:var(--color-secondary);
+
+    transition:.3s;
+
+}
+
+.navbar__link:hover{
+
+    color:var(--color-secondary);
+
+}
+
+.navbar__link:hover::after{
+
+    width:100%;
+
+}
+
+.navbar__link.active{
+
+    color:var(--color-secondary);
+
+}
+
+.navbar__link.active::after{
+
+    width:100%;
+
+}
+
+.navbar__action{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:20px;
+
+}
+
+.btn-whatsapp{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    height:52px;
+
+    padding:0 30px;
+
+    border-radius:999px;
+
+    font-size:16px;
+
+    background:var(--color-secondary);
+
+    color:#fff;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.btn-whatsapp:hover{
+
+    color:#fff;
+
+    transform:translateY(-2px);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.btn-full{
+
+    justify-content:center;
+
+    width:100%;
+
+}
+
+.navbar__toggle{
+
+    width:48px;
+
+    height:48px;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+.navbar__toggle span{
+
+    width:26px;
+
+    height:2px;
+
+    background:#fff;
+
+    border-radius:10px;
+
+    transition:.3s;
+
+}
+
+.navbar__toggle.active span:nth-child(1){
+
+    transform:translateY(8px) rotate(45deg);
+
+}
+
+.navbar__toggle.active span:nth-child(2){
+
+    opacity:0;
+
+}
+
+.navbar__toggle.active span:nth-child(3){
+
+    transform:translateY(-8px) rotate(-45deg);
+
+}
+
+.mobile-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.35s;
+
+    z-index:998;
+
+}
+
+.mobile-overlay.active{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+.mobile-menu{
+
+    position:fixed;
+
+    top:0;
+
+    right:-360px;
+
+    width:340px;
+
+    max-width:90%;
+
+    height:100vh;
+
+    background:#fff;
+
+    z-index:999;
+
+    transition:.4s ease;
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:28px;
+
+}
+
+.mobile-menu.active{
+
+    right:0;
+
+}
+
+.mobile-menu__header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:40px;
+
+}
+
+.mobile-menu__header img{
+
+    height:46px;
+
+}
+
+.mobile-menu__close{
+
+    font-size:24px;
+
+    color:var(--color-heading);
+
+}
+
+.mobile-menu__nav{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+}
+
+.mobile-menu__nav a{
+
+    color:var(--color-heading);
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.mobile-menu__nav a:hover{
+
+    color:var(--color-secondary);
+
+}
+
+.mobile-menu__footer{
+
+    margin-top:auto;
+
+}
+
+@media(max-width:991px){
+
+    .navbar__menu{
+
+        display:none;
+
+    }
+
+    .navbar__toggle{
+
+        display:flex;
+
+    }
+
+    .btn-whatsapp{
+
+        display:none;
+
+    }
+
+}
+
+@media(min-width:992px){
+
+    .mobile-menu{
+
+        display:none;
+
+    }
+
+    .mobile-overlay{
+
+        display:none;
+
+    }
+
+}
+
+.hero-test{
+
+    height:120vh;
+
+    background-image:url('../img/hero-building.jpg');
+
+    background-size:cover;
+
+    background-position:center;
+
+    position:relative;
+
+}
+
+.hero-test::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(8,27,51,.88) 0%,
+        rgba(8,27,51,.72) 45%,
+        rgba(8,27,51,.35) 100%
+    );
+
+}

@@ -1,127 +1,113 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
 
+    <!-- Required Meta -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?= isset($title) ? $title : 'PT Sinergi Aset Jagat Integrasi'; ?></title>
+    <!-- SEO -->
+    <title><?= isset($title) ? $title . ' | PT Sinergi Aset Jagat Integrasi' : 'PT Sinergi Aset Jagat Integrasi'; ?></title>
 
-    <meta name="description"
-        content="PT Sinergi Aset Jagat Integrasi - Solusi Pengelolaan Aset, Properti, Legal dan Konsultasi Bisnis">
+    <meta name="description" content="<?= isset($description) ? $description : ''; ?>">
+    <meta name="keywords" content="<?= isset($keywords) ? $keywords : ''; ?>">
+    <meta name="author" content="PT Sinergi Aset Jagat Integrasi">
 
-    <link rel="icon" href="<?= base_url('assets/frontend/favicon.png') ?>">
-
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        rel="stylesheet">
-
-    <!-- Swiper -->
-    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-        rel="stylesheet">
-
-    <!-- AOS -->
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css"
-        rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<?= base_url('assets/frontend/img/favicon.png'); ?>">
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link href="<?= base_url('assets/frontend/style.css') ?>"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="<?= base_url('assets/frontend/css/style.css'); ?>">
 
 </head>
 
-<body>
+<body class="<?= isset($body_class) ? $body_class : ''; ?>">
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom">
+<!-- ===============================
+Mobile Overlay
+=============================== -->
+
+<div class="mobile-overlay"></div>
+
+<!-- ===============================
+Header
+=============================== -->
+
+<header
+    id="header"
+    class="header <?= !empty($transparent_header) ? '' : 'scrolled'; ?>">
 
     <div class="container">
 
-        <a class="navbar-brand d-flex align-items-center"
-            href="<?= base_url() ?>">
+        <nav class="navbar">
 
-            <img src="<?= base_url('assets/frontend/img/logo.png') ?>"
-                class="logo me-2">
+            <!-- ===============================
+            Logo
+            =============================== -->
 
-        </a>
+            <a href="<?= base_url(); ?>" class="navbar__logo">
 
-        <button class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#mainMenu">
+                <img
+                    src="<?= base_url('assets/frontend/img/logo-white.png');?>"
+                    data-white="<?= base_url('assets/frontend/img/logo-white.png');?>"
+                    data-dark="<?= base_url('assets/frontend/img/logo-blue.png');?>"
+                    id="navbarLogo"
+                    alt="Logo">
 
-            <span class="navbar-toggler-icon"></span>
+            </a>
 
-        </button>
+            <!-- ===============================
+            Desktop Menu
+            =============================== -->
 
-        <div class="collapse navbar-collapse"
-            id="mainMenu">
+            <ul class="navbar__menu">
 
-            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="navbar__item">
 
-                <li class="nav-item">
-                    <a class="nav-link active"
-                        href="<?= base_url() ?>">
-                        Beranda
+                    <a href="<?= base_url(); ?>" class="navbar__link active">
+
+                        Home
+
                     </a>
+
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link"
-                        href="#">
-                        Tentang Kami
+                <li class="navbar__item">
+
+                    <a href="<?= base_url('property'); ?>" class="navbar__link">
+
+                        Properties
+
                     </a>
+
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link"
-                        href="#">
-                        Layanan
-                    </a>
-                </li>
+                <li class="navbar__item">
 
-                <li class="nav-item">
-                    <a class="nav-link"
-                        href="#">
-                        Properti
-                    </a>
-                </li>
+                    <a href="<?= base_url(); ?>#contact" class="navbar__link">
 
-                <li class="nav-item">
-                    <a class="nav-link"
-                        href="#">
-                        Aset & Agunan
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link"
-                        href="#">
-                        Artikel
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link"
-                        href="#">
-                        Kontak
-                    </a>
-                </li>
-
-                <li class="nav-item ms-lg-3">
-
-                    <a href="#"
-                        class="btn btn-gold">
-
-                        <i class="fa-solid fa-phone me-2"></i>
-                        Konsultasi Sekarang
+                        Contact
 
                     </a>
 
@@ -129,8 +115,108 @@
 
             </ul>
 
-        </div>
+            <!-- ===============================
+            Right Side
+            =============================== -->
+
+            <div class="navbar__action">
+
+                <a href="https://wa.me/6281316874613"
+                   target="_blank"
+                   class="btn-whatsapp">
+
+                    <i class="bi bi-whatsapp"></i>
+
+                    <span>WhatsApp</span>
+
+                </a>
+
+                <!-- Hamburger -->
+
+                <button class="navbar__toggle"
+                        id="navbarToggle"
+                        aria-label="Toggle Navigation">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
 
     </div>
 
-</nav>
+</header>
+
+<!-- ===============================
+Mobile Navigation
+=============================== -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <div class="mobile-menu__header">
+
+        <img src="<?= base_url('assets/frontend/img/icon-logo.png'); ?>"
+             alt="Logo">
+
+        <button class="mobile-menu__close"
+                id="mobileClose">
+
+            <i class="bi bi-x-lg"></i>
+
+        </button>
+
+    </div>
+
+    <ul class="mobile-menu__nav">
+
+        <li class="navbar__item">
+            <a href="<?= base_url(); ?>"
+            class="navbar__link <?= ($this->uri->segment(1) == '') ? 'active' : ''; ?>">
+                Home
+            </a>
+        </li>
+
+        <li class="navbar__item">
+            <a href="<?= base_url('property'); ?>"
+            class="navbar__link <?= ($this->uri->segment(1) == 'property') ? 'active' : ''; ?>">
+                Properties
+            </a>
+        </li>
+
+        <li>
+
+            <a href="<?= base_url(); ?>#contact">
+
+                Contact
+
+            </a>
+
+        </li>
+
+    </ul>
+
+    <div class="mobile-menu__footer">
+
+        <a href="https://wa.me/6281316874613"
+           target="_blank"
+           class="btn-whatsapp btn-full">
+
+            <i class="bi bi-whatsapp"></i>
+
+            WhatsApp
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- ===============================
+Main Content
+=============================== -->
+
+<main>
