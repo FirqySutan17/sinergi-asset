@@ -16,7 +16,7 @@
     <meta name="author" content="PT Sinergi Aset Jagat Integrasi">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?= base_url('assets/frontend/img/favicon.png'); ?>">
+    <link rel="shortcut icon" href="<?= base_url('assets/frontend/img/favicon-192.png'); ?>">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -159,7 +159,7 @@ Mobile Navigation
 
     <div class="mobile-menu__header">
 
-        <img src="<?= base_url('assets/frontend/img/icon-logo.png'); ?>"
+        <img src="<?= base_url('assets/frontend/img/logo-blue.png'); ?>"
              alt="Logo">
 
         <button class="mobile-menu__close"
