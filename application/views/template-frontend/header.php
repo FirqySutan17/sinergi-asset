@@ -220,4 +220,4 @@ Mobile Navigation
 Main Content
 =============================== -->
 
-<main>
+<main style="overflow: hidden;">
