@@ -8,5 +8,6 @@ $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
 $route['dashboard'] = 'dashboard/index';
 $route['property'] = 'property/index';
+$route['property-detail'] = 'property/property_detail';
 
 

@@ -56,7 +56,8 @@ Header
 
 <header
     id="header"
-    class="header <?= !empty($transparent_header) ? '' : 'scrolled'; ?>">
+    class="header <?= !empty($transparent_header) ? '' : 'scrolled'; ?>"
+    data-transparent="<?= !empty($transparent_header) ? 'true' : 'false'; ?>">
 
     <div class="container">
 
