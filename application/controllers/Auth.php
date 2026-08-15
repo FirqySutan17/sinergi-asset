@@ -26,54 +26,78 @@ class Auth extends CI_Controller {
         $username = $this->input->post('username', TRUE);
         $password = $this->input->post('password', TRUE);
 
-        $user = $this->Auth_model->check_login($username, $password);
+        /*
+        |--------------------------------------------------------------------------
+        | VALIDASI INPUT
+        |--------------------------------------------------------------------------
+        */
 
-        if (!$user) {
-            $this->session->set_flashdata('error', 'Username atau password salah!');
-            redirect('auth/login');
+        if (empty($username) || empty($password)) {
+
+            $this->session->set_flashdata(
+                'error',
+                'Username dan password wajib diisi.'
+            );
+
+            return redirect('auth/login');
         }
 
-        $plant_name = $this->db->select('CODE_NAME')
-            ->from('cd_code')
-            ->where('HEAD_CODE', 'AJ')
-            ->where('CODE', $user->plant)
-            ->get()
-            ->row('CODE_NAME');
 
-        $role = $this->db->select('role_name')
-            ->from('roles')
-            ->where('id', $user->role_id)
-            ->get()
-            ->row('role_name');
+        /*
+        |--------------------------------------------------------------------------
+        | CHECK LOGIN
+        |--------------------------------------------------------------------------
+        */
 
-        $permissions_raw = $this->db
-            ->select('p.permission_key')
-            ->from('permissions p')
-            ->join('role_permissions rp', 'rp.permission_id = p.id')
-            ->where('rp.role_id', $user->role_id)
-            ->get()
-            ->result_array();
+        $user = $this->Auth_model->check_login(
+            $username,
+            $password
+        );
 
-        $permissions = array_column($permissions_raw, 'permission_key');
+
+        /*
+        |--------------------------------------------------------------------------
+        | LOGIN FAILED
+        |--------------------------------------------------------------------------
+        */
+
+        if (!$user) {
+
+            $this->session->set_flashdata(
+                'error',
+                'Username atau password salah!'
+            );
+
+            return redirect('auth/login');
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | SET SESSION
+        |--------------------------------------------------------------------------
+        */
 
         $this->session->set_userdata([
-            'user_id'     => $user->id,
-            'username'    => $user->username,
-            'name'        => $user->name,
-            'plant'       => $user->plant,
-            'plant_name'  => $plant_name,
 
-            // ✅ INI YANG PALING PENTING
-            'role_id'     => (int) $user->role_id,
+            'user_id'  => $user->id,
 
-            // ✅ BOLEH SIMPAN NAMA ROLE TERPISAH
-            'role'        => $role, // "Super Admin"
+            'username' => $user->username,
 
-            'permissions' => $permissions,
-            'logged_in'   => TRUE
+            'name'     => $user->name,
+
+            'logged_in' => TRUE
+
         ]);
 
-        redirect('dashboard');
+
+        /*
+        |--------------------------------------------------------------------------
+        | REDIRECT DASHBOARD
+        |--------------------------------------------------------------------------
+        */
+
+        return redirect('dashboard');
     }
 
     public function logout()

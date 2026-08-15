@@ -82,11 +82,35 @@ Header
             Desktop Menu
             =============================== -->
 
+            <?php
+            $current_uri = $this->uri->segment(1);
+
+            /*
+            |--------------------------------------------------------------------------
+            | ACTIVE MENU
+            |--------------------------------------------------------------------------
+            | Home       = URI kosong
+            | Properties = /property/...
+            | Contact    = #contact di homepage
+            |--------------------------------------------------------------------------
+            */
+
+            $is_home = empty($current_uri);
+
+            $is_property = (
+                $current_uri === 'property'
+            );
+            ?>
+
             <ul class="navbar__menu">
+
+                <!-- HOME -->
 
                 <li class="navbar__item">
 
-                    <a href="<?= base_url(); ?>" class="navbar__link active">
+                    <a
+                        href="<?= base_url(); ?>"
+                        class="navbar__link <?= $is_home ? 'active' : ''; ?>">
 
                         Home
 
@@ -94,9 +118,14 @@ Header
 
                 </li>
 
+
+                <!-- PROPERTIES -->
+
                 <li class="navbar__item">
 
-                    <a href="<?= base_url('property'); ?>" class="navbar__link">
+                    <a
+                        href="<?= base_url('property'); ?>"
+                        class="navbar__link <?= $is_property ? 'active' : ''; ?>">
 
                         Properties
 
@@ -104,9 +133,14 @@ Header
 
                 </li>
 
+
+                <!-- CONTACT -->
+
                 <li class="navbar__item">
 
-                    <a href="<?= base_url(); ?>#contact" class="navbar__link">
+                    <a
+                        href="<?= base_url(); ?>#contact"
+                        class="navbar__link">
 
                         Contact
 
@@ -122,9 +156,11 @@ Header
 
             <div class="navbar__action">
 
-                <a href="https://wa.me/6281316874613"
-                   target="_blank"
-                   class="btn-whatsapp">
+                <a
+                    href="https://wa.me/6281316874613?text=Hello%2C%20I%20would%20like%20to%20get%20a%20property%20consultation."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-whatsapp">
 
                     <i class="bi bi-whatsapp"></i>
 
@@ -202,9 +238,11 @@ Mobile Navigation
 
     <div class="mobile-menu__footer">
 
-        <a href="https://wa.me/6281316874613"
-           target="_blank"
-           class="btn-whatsapp btn-full">
+        <a
+            href="https://wa.me/6281316874613?text=Hello%2C%20I%20would%20like%20to%20get%20a%20property%20consultation."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-whatsapp btn-full">
 
             <i class="bi bi-whatsapp"></i>
 

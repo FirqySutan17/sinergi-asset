@@ -1,51 +1,101 @@
-<?php
+<style>
+    /* ==========================================================
+PROPERTY DOCUMENTS
+========================================================== */
 
-// Temporary dummy data
-// Nanti diganti dari database
+.property-documents-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
 
-$property = [
+.property-document-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 18px;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    background: #fff;
+    transition: all 0.25s ease;
+}
 
-    'title' => 'Premium Office Tower',
+.property-document-item:hover {
+    border-color: #c9a45c;
+    transform: translateY(-1px);
+}
 
-    'category' => 'Commercial Office',
+.property-document-item__icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #f8f5ef;
+    font-size: 21px;
+}
 
-    'location' => 'South Jakarta',
+.property-document-item__info {
+    flex: 1;
+    min-width: 0;
+}
 
-    'class' => 'Grade A Office',
+.property-document-item__info span {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #999;
+}
 
-    'status' => 'Available',
+.property-document-item__info strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+}
 
-    'building_area' => '12,500 m²',
+.property-document-item__action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    color: #222;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
 
-    'land_area' => '4,800 m²',
+.property-document-item__action:hover {
+    color: #b08a3c;
+}
 
-    'ownership' => 'Strata Title',
+.property-document-item__action i {
+    font-size: 14px;
+}
 
-    'description' => '
-        A premium commercial office property strategically
-        located in South Jakarta, designed to support modern
-        business operations and long-term investment value.
+@media (max-width: 767.98px) {
 
-        The property offers professional-grade facilities,
-        excellent accessibility, and a strategic location
-        within one of Jakarta\'s established commercial
-        districts.
-    ',
+    .property-document-item {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
 
-    'images' => [
+    .property-document-item__info {
+        flex: 1;
+    }
 
-        'hero-building.jpg',
-        'hero-building.jpg',
-        'hero-building.jpg',
-        'hero-building.jpg',
-        'hero-building.jpg'
+    .property-document-item__action {
+        width: 100%;
+        padding-left: 60px;
+    }
 
-    ]
-
-];
-
-?>
-
+}
+</style>
 
 <!-- ==========================================================
 PROPERTY DETAIL HEADER
@@ -67,7 +117,7 @@ PROPERTY DETAIL HEADER
 
             <i class="bi bi-chevron-right"></i>
 
-            <a href="<?= site_url('properties'); ?>">
+            <a href="<?= site_url('property'); ?>">
 
                 Properties
 
@@ -77,7 +127,11 @@ PROPERTY DETAIL HEADER
 
             <span>
 
-                <?= $property['title']; ?>
+                <?= htmlspecialchars(
+    $property['title'],
+    ENT_QUOTES,
+    'UTF-8'
+); ?>
 
             </span>
 
@@ -92,13 +146,21 @@ PROPERTY DETAIL HEADER
 
                 <span class="property-detail-header__category">
 
-                    <?= $property['category']; ?>
+                    <?= htmlspecialchars(
+                        $property['category_name'] ?? 'Property',
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ); ?>
 
                 </span>
 
                 <h1>
 
-                    <?= $property['title']; ?>
+                    <?= htmlspecialchars(
+    $property['title'],
+    ENT_QUOTES,
+    'UTF-8'
+); ?>
 
                 </h1>
 
@@ -108,15 +170,40 @@ PROPERTY DETAIL HEADER
 
                         <i class="bi bi-geo-alt-fill"></i>
 
-                        <?= $property['location']; ?>
+                        <?= htmlspecialchars(
+                            $property['city'] ?? '',
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ); ?>
+
+                        <?php if (!empty($property['province'])): ?>
+
+                            ,
+                            <?= htmlspecialchars(
+                                $property['province'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>
+
+                        <?php endif; ?>
 
                     </span>
 
+
                     <span class="property-detail-header__dot"></span>
+
 
                     <span>
 
-                        <?= $property['class']; ?>
+                        <?= htmlspecialchars(
+                            $property['asset_class']
+                                ?: (
+                                    $property['asset_type']
+                                    ?: 'Property Asset'
+                                ),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ); ?>
 
                     </span>
 
@@ -132,19 +219,26 @@ PROPERTY DETAIL HEADER
                 <button
                     type="button"
                     class="property-action-button"
-                    aria-label="Share property">
+                    aria-label="Share property"
+                    id="sharePropertyButton">
 
                     <i class="bi bi-share"></i>
 
                 </button>
 
                 <a
-                    href="#property-inquiry"
+                    href="https://wa.me/6281316874613?text=<?= rawurlencode(
+                        'Hello, I am interested in the property "' .
+                        $property['title'] .
+                        '" and would like to get more information.'
+                    ); ?>"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     class="property-detail-header__contact">
 
                     Contact About Property
 
-                    <i class="bi bi-arrow-down"></i>
+                    <i class="bi bi-whatsapp"></i>
 
                 </a>
 
@@ -177,10 +271,13 @@ PROPERTY GALLERY
 
                 <img
                     src="<?= base_url(
-                        'assets/frontend/img/' .
-                        $property['images'][0]
+                        $property['images'][0]['image']
                     ); ?>"
-                    alt="<?= htmlspecialchars($property['title']); ?>"
+                    alt="<?= htmlspecialchars(
+                        $property['title'],
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ); ?>"
                     data-gallery-index="0">
 
                 <div class="property-gallery__overlay"></div>
@@ -204,71 +301,162 @@ PROPERTY GALLERY
 
             <div class="property-gallery__side">
 
+                <!-- IMAGE 2 -->
 
-                <!-- Image 2 -->
+                <?php if (!empty($property['images'][1])): ?>
 
-                <div
-                    class="property-gallery__item"
-                    data-open-gallery="1">
+                    <div
+                        class="property-gallery__item"
+                        data-open-gallery="1">
 
-                    <img
-                        src="<?= base_url(
-                            'assets/frontend/img/' .
-                            $property['images'][1]
-                        ); ?>"
-                        alt="<?= htmlspecialchars($property['title']); ?>"
-                        data-gallery-index="1">
+                        <img
+                            src="<?= base_url(
+                                $property['images'][1]['image']
+                            ); ?>"
+                            alt="<?= htmlspecialchars(
+                                $property['title'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>"
+                            data-gallery-index="1">
 
-                    <div class="property-gallery__overlay"></div>
+                        <div class="property-gallery__overlay"></div>
 
-                </div>
+                    </div>
 
+                <?php else: ?>
 
-                <!-- Image 3 -->
-
-                <div
-                    class="property-gallery__item"
-                    data-open-gallery="2">
-
-                    <img
-                        src="<?= base_url(
-                            'assets/frontend/img/' .
-                            $property['images'][2]
-                        ); ?>"
-                        alt="<?= htmlspecialchars($property['title']); ?>"
-                        data-gallery-index="2">
-
-                    <div class="property-gallery__overlay"></div>
-
-
-                    <!-- View Gallery -->
-
-                    <button
-                        type="button"
-                        class="property-gallery__view-all"
+                    <div
+                        class="property-gallery__item"
                         data-open-gallery="0">
 
-                        <i class="bi bi-images"></i>
+                        <img
+                            src="<?= base_url(
+                                $property['images'][0]['image']
+                            ); ?>"
+                            alt="<?= htmlspecialchars(
+                                $property['title'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>">
 
-                        <div>
+                        <div class="property-gallery__overlay"></div>
 
-                            <strong>
+                    </div>
 
-                                View Gallery
+                <?php endif; ?>
 
-                            </strong>
 
-                            <small>
+                <!-- IMAGE 3 -->
 
-                                <?= count($property['images']); ?> Photos
+                <?php if (!empty($property['images'][2])): ?>
 
-                            </small>
+                    <div
+                        class="property-gallery__item"
+                        data-open-gallery="2">
 
-                        </div>
+                        <img
+                            src="<?= base_url(
+                                $property['images'][2]['image']
+                            ); ?>"
+                            alt="<?= htmlspecialchars(
+                                $property['title'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>"
+                            data-gallery-index="2">
 
-                    </button>
+                        <div class="property-gallery__overlay"></div>
 
-                </div>
+
+                        <!-- VIEW ALL -->
+
+                        <button
+                            type="button"
+                            class="property-gallery__view-all"
+                            data-open-gallery="0">
+
+                            <i class="bi bi-images"></i>
+
+                            <div>
+
+                                <strong>
+                                    View Gallery
+                                </strong>
+
+                                <small>
+                                    <?= count($property['images']); ?> Photos
+                                </small>
+
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                <?php elseif (count($property['images']) > 1): ?>
+
+                    <div
+                        class="property-gallery__item"
+                        data-open-gallery="1">
+
+                        <img
+                            src="<?= base_url(
+                                $property['images'][1]['image']
+                            ); ?>"
+                            alt="<?= htmlspecialchars(
+                                $property['title'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>">
+
+                        <div class="property-gallery__overlay"></div>
+
+
+                        <button
+                            type="button"
+                            class="property-gallery__view-all"
+                            data-open-gallery="0">
+
+                            <i class="bi bi-images"></i>
+
+                            <div>
+
+                                <strong>
+                                    View Gallery
+                                </strong>
+
+                                <small>
+                                    <?= count($property['images']); ?> Photos
+                                </small>
+
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                <?php else: ?>
+
+                    <div
+                        class="property-gallery__item"
+                        data-open-gallery="0">
+
+                        <img
+                            src="<?= base_url(
+                                $property['images'][0]['image']
+                            ); ?>"
+                            alt="<?= htmlspecialchars(
+                                $property['title'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>">
+
+                        <div class="property-gallery__overlay"></div>
+
+                    </div>
+
+                <?php endif; ?>
 
             </div>
 
@@ -343,7 +531,9 @@ PROPERTY DETAIL CONTENT
 
                         <?= nl2br(
                             htmlspecialchars(
-                                trim($property['description'])
+                                trim($property['description'] ?? ''),
+                                ENT_QUOTES,
+                                'UTF-8'
                             )
                         ); ?>
 
@@ -402,7 +592,11 @@ PROPERTY DETAIL CONTENT
 
                                 <strong>
 
-                                    <?= $property['category']; ?>
+                                    <?= htmlspecialchars(
+                                        $property['category_name'] ?? 'Property',
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ); ?>
 
                                 </strong>
 
@@ -431,7 +625,11 @@ PROPERTY DETAIL CONTENT
 
                                 <strong>
 
-                                    <?= $property['class']; ?>
+                                    <?= htmlspecialchars(
+                                        $property['asset_class'] ?? '—',
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ); ?>
 
                                 </strong>
 
@@ -460,7 +658,13 @@ PROPERTY DETAIL CONTENT
 
                                 <strong>
 
-                                    <?= $property['status']; ?>
+                                    <?= htmlspecialchars(
+                                        ucfirst(
+                                            $property['status'] ?? ''
+                                        ),
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ); ?>
 
                                 </strong>
 
@@ -489,7 +693,13 @@ PROPERTY DETAIL CONTENT
 
                                 <strong>
 
-                                    <?= $property['building_area']; ?>
+                                    <?= !empty($property['building_area'])
+                                    ? htmlspecialchars(
+                                        $property['building_area'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ) . ' m²'
+                                    : '—'; ?>
 
                                 </strong>
 
@@ -518,7 +728,13 @@ PROPERTY DETAIL CONTENT
 
                                 <strong>
 
-                                    <?= $property['land_area']; ?>
+                                    <?= !empty($property['land_area'])
+                                    ? htmlspecialchars(
+                                        $property['land_area'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ) . ' m²'
+                                    : '—'; ?>
 
                                 </strong>
 
@@ -527,27 +743,31 @@ PROPERTY DETAIL CONTENT
                         </div>
 
 
-                        <!-- Ownership -->
+                        <!-- Year Built -->
 
                         <div class="property-info-item">
 
                             <div class="property-info-item__icon">
 
-                                <i class="bi bi-file-earmark-text"></i>
+                                <i class="bi bi-calendar3"></i>
 
                             </div>
 
                             <div>
 
                                 <span>
-
-                                    Ownership
-
+                                    Year Built
                                 </span>
 
                                 <strong>
 
-                                    <?= $property['ownership']; ?>
+                                    <?= !empty($property['year_built'])
+                                        ? htmlspecialchars(
+                                            $property['year_built'],
+                                            ENT_QUOTES,
+                                            'UTF-8'
+                                        )
+                                        : '—'; ?>
 
                                 </strong>
 
@@ -559,6 +779,132 @@ PROPERTY DETAIL CONTENT
 
                 </div>
 
+                <!-- ==================================================
+                PROPERTY DOCUMENTS
+                ================================================== -->
+
+                <?php if (!empty($property['documents'])): ?>
+
+                    <div class="property-detail-block">
+
+                        <div class="property-block-heading">
+
+                            <div>
+
+                                <div class="property-section-label">
+
+                                    PROPERTY DOCUMENTS
+
+                                </div>
+
+                                <h2>
+
+                                    Property Documents
+
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="property-documents-list">
+
+                            <?php foreach (
+                                $property['documents']
+                                as $document
+                            ): ?>
+
+                                <div class="property-document-item">
+
+                                    <div class="property-document-item__icon">
+
+                                        <?php
+                                        $extension = strtolower(
+                                            pathinfo(
+                                                $document['file'],
+                                                PATHINFO_EXTENSION
+                                            )
+                                        );
+                                        ?>
+
+                                        <?php if ($extension === 'pdf'): ?>
+
+                                            <i class="bi bi-file-earmark-pdf"></i>
+
+                                        <?php elseif (
+                                            in_array(
+                                                $extension,
+                                                ['doc', 'docx'],
+                                                true
+                                            )
+                                        ): ?>
+
+                                            <i class="bi bi-file-earmark-word"></i>
+
+                                        <?php elseif (
+                                            in_array(
+                                                $extension,
+                                                ['xls', 'xlsx'],
+                                                true
+                                            )
+                                        ): ?>
+
+                                            <i class="bi bi-file-earmark-excel"></i>
+
+                                        <?php else: ?>
+
+                                            <i class="bi bi-file-earmark-text"></i>
+
+                                        <?php endif; ?>
+
+                                    </div>
+
+
+                                    <div class="property-document-item__info">
+
+                                        <span>
+                                            Property Document
+                                        </span>
+
+                                        <strong>
+
+                                            <?= htmlspecialchars(
+                                                $document['title'],
+                                                ENT_QUOTES,
+                                                'UTF-8'
+                                            ); ?>
+
+                                        </strong>
+
+                                    </div>
+
+
+                                    <a
+                                        href="<?= base_url(
+                                            $document['file']
+                                        ); ?>"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="property-document-item__action">
+
+                                        <span>
+                                            View Document
+                                        </span>
+
+                                        <i class="bi bi-arrow-up-right"></i>
+
+                                    </a>
+
+                                </div>
+
+                            <?php endforeach; ?>
+
+                        </div>
+
+                    </div>
+
+                <?php endif; ?>
 
                 <!-- ==================================================
                 LOCATION
@@ -596,7 +942,22 @@ PROPERTY DETAIL CONTENT
 
                             <h3>
 
-                                <?= $property['location']; ?>
+                                <?= htmlspecialchars(
+                                    $property['city'] ?? '',
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ); ?>
+
+                                <?php if (!empty($property['province'])): ?>
+
+                                    ,
+                                    <?= htmlspecialchars(
+                                        $property['province'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ); ?>
+
+                                <?php endif; ?>
 
                             </h3>
 
@@ -669,7 +1030,11 @@ PROPERTY DETAIL CONTENT
 
                         <strong>
 
-                            <?= $property['title']; ?>
+                            <?= htmlspecialchars(
+                                $property['title'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>
 
                         </strong>
 
@@ -677,7 +1042,22 @@ PROPERTY DETAIL CONTENT
 
                             <i class="bi bi-geo-alt-fill"></i>
 
-                            <?= $property['location']; ?>
+                            <?= htmlspecialchars(
+                                $property['city'] ?? '',
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>
+
+                            <?php if (!empty($property['province'])): ?>
+
+                                ,
+                                <?= htmlspecialchars(
+                                    $property['province'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ); ?>
+
+                            <?php endif; ?>
 
                         </small>
 
@@ -687,7 +1067,13 @@ PROPERTY DETAIL CONTENT
                     <!-- WhatsApp -->
 
                     <a
-                        href="#"
+                        href="https://wa.me/6281316874613?text=<?= rawurlencode(
+                            'Hello, I am interested in the property "' .
+                            $property['title'] .
+                            '" and would like to get more information.'
+                        ); ?>"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="property-inquiry-whatsapp">
 
                         <i class="bi bi-whatsapp"></i>
@@ -702,11 +1088,14 @@ PROPERTY DETAIL CONTENT
 
                     </a>
 
-
                     <!-- General Contact -->
 
                     <a
-                        href="#"
+                        href="https://wa.me/6281316874613?text=<?= rawurlencode(
+                            'Hello, I would like to get a property consultation.'
+                        ); ?>"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="property-inquiry-contact">
 
                         Contact Our Team
@@ -714,7 +1103,6 @@ PROPERTY DETAIL CONTENT
                         <i class="bi bi-arrow-right"></i>
 
                     </a>
-
 
                     <div class="property-inquiry-card__note">
 
@@ -738,150 +1126,6 @@ PROPERTY DETAIL CONTENT
     </div>
 
 </section>
-
-<!-- ==========================================================
-RELATED PROPERTY
-========================================================== -->
-
-<!-- <section class="related-property">
-
-    <div class="container">
-
-        <div class="section-heading">
-
-            <span>
-
-                OUR PORTFOLIO
-
-            </span>
-
-            <h2>
-
-                Related Properties
-
-            </h2>
-
-            <p>
-
-                Discover other strategic commercial and
-                investment properties that may suit
-                your business objectives.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="related-property-grid">
-
-            <a
-                href="#"
-                class="related-property-featured">
-
-                <img
-                    src="<?= base_url(
-                        'assets/frontend/img/' .
-                        $property['images'][0]
-                    ); ?>">
-
-                <div class="related-overlay"></div>
-
-                <div class="related-content">
-
-                    <span>
-
-                        Featured Property
-
-                    </span>
-
-                    <h3>
-
-                        Premium Office Tower
-
-                    </h3>
-
-                    <p>
-
-                        South Jakarta • Grade A Office
-
-                    </p>
-
-                </div>
-
-            </a>
-
-            <div class="related-property-side">
-
-
-                <a
-                    href="#"
-                    class="related-property-small">
-
-                    <img
-                        src="<?= base_url(
-                            'assets/frontend/img/' .
-                            $property['images'][1]
-                        ); ?>">
-
-                    <div class="related-overlay"></div>
-
-                    <div class="related-content">
-
-                        <h4>
-
-                            BSD Business Park
-
-                        </h4>
-
-                        <small>
-
-                            Tangerang
-
-                        </small>
-
-                    </div>
-
-                </a>
-
-
-                <a
-                    href="#"
-                    class="related-property-small">
-
-                    <img
-                        src="<?= base_url(
-                            'assets/frontend/img/' .
-                            $property['images'][2]
-                        ); ?>">
-
-                    <div class="related-overlay"></div>
-
-                    <div class="related-content">
-
-                        <h4>
-
-                            Cikarang Logistics Hub
-
-                        </h4>
-
-                        <small>
-
-                            Bekasi
-
-                        </small>
-
-                    </div>
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section> -->
 
 <!-- ==========================================================
 CTA PROPERTY
@@ -913,8 +1157,12 @@ CTA PROPERTY
             </p>
 
             <a
-            href="#"
-            class="btn btn-gold">
+                href="https://wa.me/6281316874613?text=<?= rawurlencode(
+                            'Hello, I would like to get a property consultation.'
+                        ); ?>"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-gold">
 
                 <i class="bi bi-whatsapp"></i>
 
@@ -1012,7 +1260,10 @@ PROPERTY GALLERY LIGHTBOX
 
     <div class="property-lightbox__thumbnails">
 
-        <?php foreach ($property['images'] as $index => $image): ?>
+        <?php foreach (
+            $property['images']
+            as $index => $image
+        ): ?>
 
             <button
                 type="button"
@@ -1021,9 +1272,14 @@ PROPERTY GALLERY LIGHTBOX
 
                 <img
                     src="<?= base_url(
-                        'assets/frontend/img/' . $image
+                        $image['image']
                     ); ?>"
-                    alt="<?= htmlspecialchars($property['title']); ?>">
+                    alt="<?= htmlspecialchars(
+                        $image['caption']
+                            ?: $property['title'],
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ); ?>">
 
             </button>
 
@@ -1032,3 +1288,92 @@ PROPERTY GALLERY LIGHTBOX
     </div>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const shareButton =
+            document.getElementById('sharePropertyButton');
+
+        if (!shareButton) {
+            return;
+        }
+
+        shareButton.addEventListener('click', async function () {
+
+            const shareData = {
+                title: <?= json_encode($property['title']); ?>,
+                text: <?= json_encode(
+                    'Check out this property: ' .
+                    $property['title']
+                ); ?>,
+                url: window.location.href
+            };
+
+            /*
+            |--------------------------------------------------------------------------
+            | NATIVE SHARE
+            |--------------------------------------------------------------------------
+            */
+
+            if (navigator.share) {
+
+                try {
+
+                    await navigator.share(shareData);
+
+                } catch (error) {
+
+                    /*
+                    | User cancelled share dialog.
+                    | No action needed.
+                    */
+
+                    if (error.name !== 'AbortError') {
+                        console.error(
+                            'Share failed:',
+                            error
+                        );
+                    }
+
+                }
+
+                return;
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | FALLBACK - COPY LINK
+            |--------------------------------------------------------------------------
+            */
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    window.location.href
+                );
+
+                alert(
+                    'Property link copied to clipboard.'
+                );
+
+            } catch (error) {
+
+                /*
+                |--------------------------------------------------------------------------
+                | FINAL FALLBACK
+                |--------------------------------------------------------------------------
+                */
+
+                window.prompt(
+                    'Copy this property link:',
+                    window.location.href
+                );
+
+            }
+
+        });
+
+    });
+</script>

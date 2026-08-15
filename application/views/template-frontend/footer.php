@@ -21,18 +21,18 @@
 
                             PT Sinergi Aset Jagat Integrasi delivers
                             strategic consulting, asset management,
-                            legal advisory, and property management
+                            and property management
                             services for sustainable business growth.
 
                         </p>
 
-                        <div class="footer-social">
+                        <!-- <div class="footer-social">
 
                             <a href="#"><i class="bi bi-linkedin"></i></a>
 
                             <a href="#"><i class="bi bi-instagram"></i></a>
 
-                        </div>
+                        </div> -->
 
                     </div>
 
@@ -46,10 +46,6 @@
                     <ul>
 
                         <li><a href="<?= site_url(); ?>">Home</a></li>
-
-                        <li><a href="#about">About</a></li>
-
-                        <li><a href="#services">Services</a></li>
 
                         <li><a href="<?= site_url('property'); ?>">Properties</a></li>
 
@@ -70,8 +66,6 @@
 
                         <li>Recovery Solution</li>
 
-                        <li>Legal Advisory</li>
-
                         <li>Property Management</li>
 
                     </ul>
@@ -89,15 +83,15 @@
 
                             <i class="bi bi-geo-alt-fill"></i>
 
-                            Jakarta, Indonesia
+                            Jl Dharmawangsa VI No. 3, Pulo - Kebayoran Baru Jakarta Selatan 12160
 
                         </li>
 
                         <li>
 
-                            <i class="bi bi-envelope-fill"></i>
+                            <i class="bi bi-whatsapp"></i>
 
-                            info@sinergiaset.co.id
+                            +62 813-1687-4613
 
                         </li>
 
@@ -105,7 +99,7 @@
 
                             <i class="bi bi-telephone-fill"></i>
 
-                            +62 xxx xxxx xxxx
+                            +62 21 3825 0767 
 
                         </li>
 

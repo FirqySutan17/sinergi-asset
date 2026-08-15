@@ -1,707 +1,1166 @@
 <style>
-  :root {
-  --primary: #e60012;     /* merah ABC */
-  --primary-dark: #b8000e;
-  --secondary: #0072bc;   /* biru ABC */
-  --bg-soft: #f4f6fb;
-  --text-dark: #1f2937;
-  --text-light: #6b7280;
+
+/* ==========================================================
+   SINERGI ASSET BACKEND SIDEBAR
+   ========================================================== */
+
+:root {
+
+    --sa-navy: #071b3a;
+    --sa-navy-soft: #0d2b55;
+
+    --sa-gold: #d9ae2f;
+    --sa-gold-light: #f4e5a9;
+
+    --sa-text: #334155;
+    --sa-muted: #94a3b8;
+
+    --sa-bg: #f8fafc;
+    --sa-border: #e5e7eb;
+
 }
 
-/* SIDEBAR */
+
+/* ==========================================================
+   SIDEBAR
+   ========================================================== */
+
 .left-sidebar {
-  background: linear-gradient(180deg, #1e3282 0%, #16245c 100%);
-  color: #fff;
-  width: 260px;
-  transition: all 0.3s ease;
-  box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+
+    width: 260px;
+
+    background: #ffffff;
+
+    border-right: 1px solid var(--sa-border);
+
+    box-shadow: 4px 0 20px rgba(7, 27, 58, .04);
+
+    transition: all .3s ease;
+
 }
 
-/* LOGO */
-.brand-logo {
-  padding: 15px;
+
+/* ==========================================================
+   BRAND
+   ========================================================== */
+
+.left-sidebar .brand-logo {
+
+    height: 80px;
+
+    padding: 0 24px;
+
+    display: flex;
+
+    align-items: center;
+    
+    justify-content: center;
+
+    border-bottom: 1px solid var(--sa-border);
+
+    width: 100%
+
 }
 
-.brand-logo img {
-  width: 170px;
+
+.left-sidebar .brand-logo .logo-img {
+
+    display: flex;
+
+    align-items: center;
+
+    text-decoration: none;
+
 }
 
-.brand-logo div {
-  font-size: 14px !important;
-  color: #fff !important;
+
+.left-sidebar .brand-logo img {
+
+    width: 145px;
+
+    height: auto;
+
+    object-fit: contain;
+
 }
 
-/* USER PROFILE */
-.left-sidebar img.rounded-circle {
-  border: 3px solid rgba(255,255,255,0.3);
+
+/* ==========================================================
+   USER PROFILE
+   ========================================================== */
+
+.sidebar-profile {
+
+    margin: 18px 16px 10px;
+
+    padding: 16px;
+
+    background: #f8fafc;
+
+    border: 1px solid #eef1f5;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
 }
 
-.left-sidebar h5 {
-  color: #fff;
-  font-size: 14px;
+
+.sidebar-profile__avatar {
+
+    width: 42px;
+
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    border-radius: 50%;
+
+    background: var(--sa-navy);
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
 }
 
-.left-sidebar p {
-  color: #cbd5e1;
-  font-size: 12px;
+
+.sidebar-profile__info {
+
+    min-width: 0;
+
 }
 
-/* MENU */
-.sidebar-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #cbd5e1 !important;
-  transition: all 0.25s ease;
-  border-radius: 10px;
+
+.sidebar-profile__name {
+
+    margin: 0;
+
+    color: var(--sa-navy);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
 }
+
+
+.sidebar-profile__username {
+
+    margin: 3px 0 0;
+
+    color: var(--sa-muted);
+
+    font-size: 11px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+
+/* ==========================================================
+   NAVIGATION
+   ========================================================== */
+
+.sidebar-nav {
+
+    padding: 10px 12px 25px;
+
+}
+
+
+#sidebarnav {
+
+    padding: 0;
+
+    margin: 0;
+
+}
+
+
+/* SECTION TITLE */
+
+.sidebar-section-title {
+
+    padding: 18px 12px 8px;
+
+    margin: 0;
+
+    color: #a1aab5;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+
+}
+
+
+/* ==========================================================
+   SIDEBAR ITEM
+   ========================================================== */
+
+.sidebar-item {
+
+    list-style: none;
+
+    margin-bottom: 4px;
+
+}
+
+
+/* ==========================================================
+   SIDEBAR LINK
+   ========================================================== */
+
+.left-sidebar .sidebar-link {
+
+    min-height: 44px;
+
+    padding: 10px 12px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: #64748b !important;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition: all .2s ease;
+
+}
+
+
+.left-sidebar .sidebar-link .sidebar-icon {
+
+    width: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.left-sidebar .sidebar-link i {
+
+    font-size: 18px;
+
+    color: #94a3b8;
+
+    transition: all .2s ease;
+
+}
+
 
 /* HOVER */
-.sidebar-link:hover {
-  background: rgba(255,255,255,0.08);
-  color: #fff !important;
-  transform: translateX(5px);
+
+.left-sidebar .sidebar-link:hover {
+
+    background: #f8fafc;
+
+    color: var(--sa-navy) !important;
+
 }
 
-/* ACTIVE */
-.sidebar-link.active {
-  background: linear-gradient(90deg, #4f46e5, #1e3282);
-  color: #fff !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
+.left-sidebar .sidebar-link:hover i {
+
+    color: var(--sa-gold);
+
 }
 
-/* SUB MENU */
-.first-level {
-  background: rgba(255,255,255,0.05) !important;
-  padding: 5px;
+
+/* ==========================================================
+   ACTIVE
+   ========================================================== */
+
+.left-sidebar .sidebar-link.active {
+
+    background: var(--sa-navy);
+
+    color: #ffffff !important;
+
+    box-shadow: 0 6px 15px rgba(7, 27, 58, .15);
+
 }
 
-.child-drop a {
-  font-size: 12px;
-  color: #cbd5e1 !important;
+
+.left-sidebar .sidebar-link.active i {
+
+    color: var(--sa-gold);
+
 }
 
-.child-drop a:hover {
-  color: #fff !important;
+
+/* ==========================================================
+   SUBMENU
+   ========================================================== */
+
+.sidebar-submenu {
+
+    margin: 4px 0 8px;
+
+    padding: 4px 0 4px 34px;
+
 }
 
-/* ICON */
-.sidebar-icon i {
-  font-size: 18px;
+
+.sidebar-submenu .sidebar-link {
+
+    min-height: 38px;
+
+    padding: 8px 12px;
+
+    font-size: 12px;
+
 }
 
-/* ARROW ROTATE */
+
+.sidebar-submenu .sidebar-link i {
+
+    font-size: 7px;
+
+}
+
+
+/* ==========================================================
+   MENU ARROW
+   ========================================================== */
+
 .custom-arrow {
-  transition: transform 0.3s ease;
+
+    margin-left: auto;
+
+    font-size: 15px !important;
+
+    color: #94a3b8 !important;
+
+    transition: transform .25s ease;
+
 }
+
 
 .custom-arrow.rotate {
-  transform: rotate(90deg);
+
+    transform: rotate(90deg);
+
 }
 
-/* HEADER */
-.app-header {
-  background: #ffffff;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+
+/* ==========================================================
+   LOGOUT AREA
+   ========================================================== */
+
+.sidebar-bottom {
+
+    padding: 10px 12px 18px;
+
 }
 
-.navbar {
-  padding: 10px 20px;
+
+.sidebar-logout {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+
+    min-height: 44px;
+
+    padding: 10px 12px;
+
+    border-radius: 10px;
+
+    color: #64748b;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    transition: all .2s ease;
+
 }
 
-/* PROFILE IMAGE */
-.navbar img {
-  border: 2px solid var(--primary);
+
+.sidebar-logout i {
+
+    font-size: 18px;
+
 }
 
-.left-sidebar {
-  background: transparent;
-  border-right: 0px solid #e5e7eb;
-  box-shadow: 2px 0 12px rgba(0,0,0,0.05);
+
+.sidebar-logout:hover {
+
+    background: #fff7ed;
+
+    color: #c2410c;
+
 }
 
-/* BRAND */
-.brand-logo div {
-  color: var(--primary) !important;
-}
 
-/* USER */
-.left-sidebar h5 {
-  color: var(--text-dark);
-}
-
-.left-sidebar p {
-  color: var(--text-light);
-}
-
-/* MENU DEFAULT */
-.sidebar-link {
-  color: var(--text-dark) !important;
-  font-weight: 500;
-}
-
-/* HOVER */
-.sidebar-link:hover {
-  background: rgba(230, 0, 18, 0.08);
-  color: var(--primary) !important;
-  transform: translateX(4px);
-}
-
-/* ACTIVE MENU */
-.sidebar-link.active {
-  background: linear-gradient(90deg, #e60012, #ff4d4f);
-  color: #fff !important;
-  box-shadow: 0 4px 10px rgba(230, 0, 18, 0.3);
-}
-
-/* SUBMENU */
-.first-level {
-  background: #f9fafb !important;
-}
-
-/* SUBMENU ITEM */
-.child-drop a {
-  color: var(--text-light) !important;
-}
-
-.child-drop a:hover {
-  color: var(--primary) !important;
-}
+/* ==========================================================
+   HEADER
+   ========================================================== */
 
 .app-header {
-    background: #ffffff00;
-    border-bottom: 0px solid var(--secondary);
-    box-shadow: none;
+
+    background: rgba(255,255,255,.94);
+
+    border-bottom: 1px solid #eef1f5;
+
+    box-shadow: 0 2px 12px rgba(7,27,58,.04);
+
+    backdrop-filter: blur(10px);
+
 }
 
-/* PROFILE */
-.navbar img {
-  border: 2px solid var(--primary);
+
+.app-header .navbar {
+
+    min-height: 80px;
+
+    padding: 0 24px;
+
 }
 
-.brand-logo img {
-  width: 170px;
+
+/* ==========================================================
+   HEADER MENU BUTTON
+   ========================================================== */
+
+.app-header .nav-link {
+
+    color: var(--sa-navy);
+
 }
 
-.brand-logo {
-  padding: 15px 20px;
-  justify-content: center;
-  border-bottom: 3px solid #000;
-  margin: 0px 10px
+
+.app-header .nav-link:hover {
+
+    color: var(--sa-gold);
+
 }
 
-.nav-small-cap .hide-menu {
-  font-size: 11px !important;
-  color: #000;
-  letter-spacing: 1px;
+
+/* ==========================================================
+   HEADER PROFILE
+   ========================================================== */
+
+.header-profile {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
 }
 
-.sidebar-link:hover {
-  background: linear-gradient(90deg, rgba(230,0,18,0.08), rgba(0,114,188,0.05));
+
+.header-profile__avatar {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    background: var(--sa-navy);
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
 }
 
-.sidebar-link i {
-  transition: 0.2s;
+
+.header-profile__name {
+
+    color: var(--sa-navy);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
 }
 
-.sidebar-link:hover i {
-  color: var(--primary);
-  transform: scale(1.1);
+
+/* ==========================================================
+   DROPDOWN
+   ========================================================== */
+
+.header-profile-menu {
+
+    min-width: 190px;
+
+    border: 1px solid #eef1f5;
+
+    border-radius: 12px;
+
+    box-shadow: 0 12px 30px rgba(7,27,58,.12);
+
+    padding: 8px;
+
 }
 
-/* RESPONSIVE */
-@media (max-width: 992px) {
-  .left-sidebar {
-    position: fixed;
-    left: -260px;
-  }
 
-  .left-sidebar.show {
-    left: 0;
-  }
+.header-profile-menu .dropdown-item {
+
+    border-radius: 8px;
+
+    padding: 9px 10px;
+
+    font-size: 13px;
+
 }
+
+
+.header-profile-menu .dropdown-item:hover {
+
+    background: #f8fafc;
+
+}
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media(max-width:1199px){
+
+    .left-sidebar {
+
+        position: fixed;
+
+        left: -260px;
+
+        top: 0;
+
+        bottom: 0;
+
+        z-index: 1100;
+
+    }
+
+
+    .left-sidebar.show {
+
+        left: 0;
+
+    }
+
+}
+
+
+@media(max-width:576px){
+
+    .app-header .navbar {
+
+        padding: 0 15px;
+
+    }
+
+
+    .header-profile__name {
+
+        display: none;
+
+    }
+
+}
+
 </style>
 
+
+<!-- ==========================================================
+     SIDEBAR
+========================================================== -->
+
 <aside class="left-sidebar">
-  <div>
-    <div class="brand-logo d-flex align-items-center">
-      <a href="<?= base_url('dashboard'); ?>" class="text-nowrap logo-img" style="display: flex;align-content: center; align-items: center">
-        <img src="<?= base_url('assets/img/abc-trans.png'); ?>" alt="" /> 
-      </a>
-      <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-        <i class="ti ti-x fs-8"></i>
-      </div>
-    </div>
-    <div style="display: flex; align-items: center; justify-content: center; align-content: center; padding: 20px 5px; border-bottom: 3px solid #000; margin: 0px 10px;">
-      <img src="<?= base_url('assets/img/user-1.jpg'); ?>" alt="" width="60" height="60" class="rounded-circle">
-      <div style="display: flex; flex-direction: column; text-align: left; justify-content: center; align-items: center">
-        <h5 style="margin-top: 10px; font-weight: 700; text-transform: uppercase; text-align: center; margin-bottom: 0px"><?= $this->session->userdata('name'); ?></h5>
-        <p style="margin-bottom: 0px; font-weight: 700; text-transform: capitalize"><?= $this->session->userdata('username'); ?></p>
-      </div>
-      
-      <!-- <p style="margin-bottom: 0px; font-weight: 700; text-transform: capitalize"><?= $this->session->userdata('plant_name'); ?></p> -->
-    </div>
-    <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-      
-      <ul id="sidebarnav">
-        <!-- <li class="nav-small-cap">
-          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-          <span class="hide-menu">Home</span>
-        </li> -->
-        <style>
-        .custom-arrow.rotate {
-            transform: rotate(90deg);
-        }
-        </style>
-        <li class="sidebar-item" style="margin-top: 24px">
-          <a class="sidebar-link" href="<?= base_url('dashboard'); ?>" aria-expanded="false" style="border-radius: 10px; padding: 10px">
-            <span><i class="ti ti-layout-dashboard"></i></span>
-            <span class="hide-menu" style="font-weight: 700; font-size: 12px;">DASHBOARD</span>
-          </a>
-        </li>
 
-        <?php if (
-            has_permission('base_general_code') ||
-            has_permission('base_account') ||
-            has_permission('base_cost') ||
-            has_permission('base_item') ||
-            has_permission('base_material') ||
-            has_permission('base_customer')
-        ): ?>
-        <li class="sidebar-item nav-small-cap" style="padding: 0px; margin-top: 15px">
-            <a class="sidebar-link custom-arrow-toggle" href="javascript:void(0)" style="border-radius: 10px; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center;">
-                    <span class="sidebar-icon"><i class="ti ti-database"></i></span>
-                    <span class="hide-menu" style="font-weight: 700; font-size: 12px; margin-left: 8px;">BASE DATA</span>
-                </div> 
+    <div>
 
-                <!-- ARROW -->
-                <i class="ti ti-chevron-right custom-arrow" style="transition: 0.3s; font-size: 14px;"></i>
+
+        <!-- ==================================================
+             BRAND
+        ================================================== -->
+
+        <div class="brand-logo">
+
+            <a
+                href="<?= base_url('dashboard'); ?>"
+                class="logo-img">
+
+                <img
+                    src="<?= base_url('assets/frontend/img/logo-transparent.png'); ?>"
+                    alt="Sinergi Asset">
+
             </a>
 
-            <ul aria-expanded="false" class="collapse first-level" style="background: #efefef; border-radius:10px; margin-top: 7px">
-              <?php if (has_permission('base_general_code')): ?>
-                <li class="sidebar-item child-drop">
-                    <a href="<?= base_url('code'); ?>" class="sidebar-link">
-                        <i class="ti ti-dots"></i>
-                        <span class="hide-menu">General Code</span>
-                    </a>
-                </li>
-              <?php endif; ?>
 
-              <?php if (has_permission('base_account')): ?>
-                <li class="sidebar-item child-drop">
-                    <a href="<?= base_url('account'); ?>" class="sidebar-link">
-                        <i class="ti ti-dots"></i>
-                        <span class="hide-menu">Account</span>
-                    </a>
-                </li>
-              <?php endif; ?>
+            <!-- MOBILE CLOSE -->
 
-              <?php if (has_permission('base_cost')): ?>
-                <li class="sidebar-item child-drop">
-                    <a href="<?= base_url('cost'); ?>" class="sidebar-link">
-                        <i class="ti ti-dots"></i>
-                        <span class="hide-menu">Cost</span>
-                    </a>
-                </li>
-              <?php endif; ?>
+            <div
+                class="close-btn d-xl-none d-block sidebartoggler cursor-pointer"
+                id="sidebarCollapse">
 
-              <?php if (has_permission('base_item')): ?>
-                <li class="sidebar-item child-drop">
-                    <a href="<?= base_url('item'); ?>" class="sidebar-link">
-                        <i class="ti ti-dots"></i>
-                        <span class="hide-menu">Item</span>
-                    </a>
-                </li>
-              <?php endif; ?>
+                <i class="ti ti-x fs-6"></i>
 
-              <?php if (has_permission('base_material')): ?>
-                <li class="sidebar-item child-drop">
-                    <a href="<?= base_url('Material'); ?>" class="sidebar-link">
-                        <i class="ti ti-dots"></i>
-                        <span class="hide-menu">Material</span>
-                    </a>
-                </li>
-              <?php endif; ?>
-
-              <?php if (has_permission('base_customer')): ?>
-                <li class="sidebar-item child-drop">
-                    <a href="<?= base_url('Customer'); ?>" class="sidebar-link">
-                        <i class="ti ti-dots"></i>
-                        <span class="hide-menu">Customer</span>
-                    </a>
-                </li>
-              <?php endif; ?>
-            </ul>
-        </li>
-        <?php endif; ?>
-
-        <?php if (
-            has_permission('inventory_po') ||
-            has_permission('inventory_receive') ||
-            has_permission('inventory_receive_lb') ||
-            has_permission('inventory_material_balance') ||
-            has_permission('report_inventory_po') ||
-            has_permission('report_inventory_receive') ||
-            has_permission('report_inventory_receive_lb') ||
-            has_permission('report_inventory_material_balance')
-        ): ?>
-        <li class="sidebar-item nav-small-cap" style="padding: 0px; margin-top: 15px">
-            <a class="sidebar-link custom-arrow-toggle" href="javascript:void(0)" style="border-radius: 10px; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center;">
-                    <span class="sidebar-icon"><i class="ti ti-database"></i></span>
-                    <span class="hide-menu" style="font-weight: 700; font-size: 12px; margin-left: 8px;">INVENTORY</span>
-                </div>
-
-                <!-- ARROW -->
-                <i class="ti ti-chevron-right custom-arrow" style="transition: 0.3s; font-size: 14px;"></i>
-            </a>
-
-            <ul aria-expanded="false" class="collapse first-level" style="background: #efefef; border-radius:10px; margin-top: 7px">
-              <?php if (has_permission('inventory_po')): ?>
-                <li class="sidebar-item child-drop">
-                    <a href="<?= base_url('po'); ?>" class="sidebar-link">
-                        <i class="ti ti-dots"></i>
-                        <span class="hide-menu">PO</span>
-                    </a>
-                </li>
-              <?php endif; ?>
-
-              <?php if (has_permission('inventory_receive')): ?>
-                <li class="sidebar-item child-drop">
-                    <a href="<?= base_url('receive'); ?>" class="sidebar-link">
-                        <i class="ti ti-dots"></i>
-                        <span class="hide-menu">Receive</span>
-                    </a>
-                </li>
-              <?php endif; ?>
-
-              <!-- <?php if (has_permission('inventory_receive_lb')): ?>
-                <li class="sidebar-item child-drop">
-                    <a href="<?= base_url('receive-lb'); ?>" class="sidebar-link">
-                        <i class="ti ti-dots"></i>
-                        <span class="hide-menu">Receive LB</span>
-                    </a>
-                </li>
-              <?php endif; ?> -->
-
-              <?php if (has_permission('report_inventory_po') || has_permission('report_inventory_receive') || has_permission('report_inventory_receive_lb') || has_permission('report_inventory_material_balance')): ?>
-                <li class="sidebar-item child-drop">
-                    <a href="<?= base_url('report-inventory'); ?>" class="sidebar-link">
-                        <i class="ti ti-dots"></i>
-                        <span class="hide-menu">Report Inventory</span>
-                    </a>
-                </li>
-              <?php endif; ?>
-            </ul>
-        </li>
-        <?php endif; ?>
-
-        <?php if (
-            has_permission('productions_production') ||
-            has_permission('productions_stock_actual') ||
-            has_permission('productions_item_balance') ||
-            has_permission('report_productions_production') ||
-            has_permission('report_productions_stock_actual') ||
-            has_permission('report_productions_item_balance')
-        ): ?>
-        <!-- <li class="sidebar-item nav-small-cap" style="padding: 0px; margin-top: 15px">
-            <a class="sidebar-link custom-arrow-toggle" href="javascript:void(0)" style="border-radius: 10px; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center;">
-                    <span class="sidebar-icon"><i class="ti ti-database"></i></span>
-                    <span class="hide-menu" style="font-weight: 700; font-size: 12px; margin-left: 8px;">PRODUCTION</span>
-                </div>
-                <i class="ti ti-chevron-right custom-arrow" style="transition: 0.3s; font-size: 14px;"></i>
-            </a>
-
-            <ul aria-expanded="false" class="collapse first-level" style="background: #efefef; border-radius:10px; margin-top: 7px">
-                <?php if (has_permission('productions_production')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('production'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Production</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-
-                <?php if (has_permission('productions_stock_actual')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('stock-actual'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Stock Actual</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-
-                <?php if (has_permission('productions_moving')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('moving'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Moving</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-
-                <?php if (has_permission('productions_process')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('reprocess'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Reprocess</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-
-                <?php if (has_permission('report_productions_production') || has_permission('report_productions_stock_actual') || has_permission('report_productions_item_balance')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('report-production'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Report Production</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-              </ul>
-
-        </li> -->
-        <?php endif; ?>
-
-        <?php if (
-            has_permission('accounting_cost_entry') ||
-            has_permission('accounting_payment_entry') ||
-            has_permission('accounting_cash_in') ||
-            has_permission('report_accounting_cost') ||
-            has_permission('report_accounting_payment') ||
-            has_permission('report_accounting_cash_in')
-        ): ?>
-          <li class="sidebar-item nav-small-cap" style="padding: 0px; margin-top: 15px">
-              <a class="sidebar-link custom-arrow-toggle" href="javascript:void(0)" style="border-radius: 10px; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
-                  <div style="display: flex; align-items: center;">
-                      <span class="sidebar-icon"><i class="ti ti-database"></i></span>
-                      <span class="hide-menu" style="font-weight: 700; font-size: 12px; margin-left: 8px;">ACCOUNTING</span>
-                  </div>
-
-                  <i class="ti ti-chevron-right custom-arrow" style="transition: 0.3s; font-size: 14px;"></i>
-              </a>
-
-              <ul aria-expanded="false" class="collapse first-level" style="background: #efefef; border-radius:10px; margin-top: 7px">
-                <?php if (has_permission('accounting_cost_entry')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('mcost'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Cost Entry</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-
-                <?php if (has_permission('accounting_payment_entry')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('payment'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Payment Entry</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-
-                <?php if (has_permission('accounting_cash_in')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('cash-in'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Cash In Entry</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-
-                <?php if (has_permission('report_accounting_cost') || has_permission('report_accounting_payment') || has_permission('report_accounting_cash_in')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('report-accounting'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Report Accounting</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-              </ul>
-          </li>
-        <?php endif; ?>
-
-        <?php if (
-            has_permission('productions_sales') ||
-            has_permission('repot_productions_sales')
-        ): ?>
-        <li class="sidebar-item nav-small-cap" style="padding: 0px; margin-top: 15px">
-            <a class="sidebar-link custom-arrow-toggle" href="javascript:void(0)" style="border-radius: 10px; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center;">
-                    <span class="sidebar-icon"><i class="ti ti-database"></i></span>
-                    <span class="hide-menu" style="font-weight: 700; font-size: 12px; margin-left: 8px;">SALES</span>
-                </div>
-
-                <i class="ti ti-chevron-right custom-arrow" style="transition: 0.3s; font-size: 14px;"></i>
-            </a>
-
-            <ul aria-expanded="false" class="collapse first-level" style="background: #efefef; border-radius:10px; margin-top: 7px">
-                <?php if (has_permission('productions_sales')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('sales'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Sales</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-
-                <?php if (has_permission('report_productions_sales')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('report-sales'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Report Sales</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-              </ul>
-
-        </li>
-        <?php endif; ?>
-
-        <?php if (
-            has_permission('closing_process') ||
-            has_permission('closing_cost') ||
-            has_permission('closing_inventory_price') ||
-            has_permission('closing_pl') ||
-            has_permission('closing_sales_pl')
-        ): ?>
-          <li class="sidebar-item nav-small-cap" style="padding: 0px; margin-top: 15px">
-              <a class="sidebar-link custom-arrow-toggle" href="javascript:void(0)" style="border-radius: 10px; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
-                  <div style="display: flex; align-items: center;">
-                      <span class="sidebar-icon"><i class="ti ti-database"></i></span>
-                      <span class="hide-menu" style="font-weight: 700; font-size: 12px; margin-left: 8px;">CLOSING</span>
-                  </div>
-
-                  <i class="ti ti-chevron-right custom-arrow" style="transition: 0.3s; font-size: 14px;"></i>
-              </a>
-
-              <ul aria-expanded="false" class="collapse first-level" style="background: #efefef; border-radius:10px; margin-top: 7px">
-                <?php if (has_permission('closing_process')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('closing-process'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Process</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-                
-                <?php if (has_permission('closing_inventory_price')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('report-closing-inventory-price'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Inventory Price</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-
-                <?php if (has_permission('closing_cost')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('report-closing-cost'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Cost</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-
-                <?php if (has_permission('closing_sales_pl')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('report-closing-sales-pl'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">Sales PL</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-
-                <?php if (has_permission('closing_pl')): ?>
-                  <li class="sidebar-item child-drop">
-                      <a href="<?= base_url('report-closing-pl'); ?>" class="sidebar-link">
-                          <i class="ti ti-dots"></i>
-                          <span class="hide-menu">P/L</span>
-                      </a>
-                  </li>
-                <?php endif; ?>
-
-              </ul>
-          </li>
-        <?php endif; ?>
-
-        <?php if (
-            has_permission('settings_users') ||
-            has_permission('settings_roles')
-        ): ?>
-        <!-- <li class="sidebar-item nav-small-cap" style="padding: 0px; margin-top: 15px">
-            <a class="sidebar-link custom-arrow-toggle" href="javascript:void(0)" style="border-radius: 10px; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center;">
-                    <span class="sidebar-icon"><i class="ti ti-database"></i></span>
-                    <span class="hide-menu" style="font-weight: 700; font-size: 12px; margin-left: 8px;">SETTINGS</span>
-                </div>
-
-                <i class="ti ti-chevron-right custom-arrow" style="transition: 0.3s; font-size: 14px;"></i>
-            </a>
-
-            <ul aria-expanded="false" class="collapse first-level" style="background: #efefef; border-radius:10px; margin-top: 7px">
-              <?php if (has_permission('settings_users')): ?>
-                <li class="sidebar-item child-drop">
-                    <a href="<?= base_url('users'); ?>" class="sidebar-link">
-                        <i class="ti ti-dots"></i>
-                        <span class="hide-menu">Users</span>
-                    </a>
-                </li>
-              <?php endif; ?>
-
-              <?php if (has_permission('settings_roles')): ?>
-                <li class="sidebar-item child-drop">
-                    <a href="<?= base_url('roles'); ?>" class="sidebar-link">
-                        <i class="ti ti-dots"></i>
-                        <span class="hide-menu">Roles</span>
-                    </a>
-                </li>
-              <?php endif; ?>
-            </ul>
-        </li> -->
-        <?php endif; ?>
-      </ul>
-    </nav>
-  </div>
-</aside>
-<div class="body-wrapper">
-  <!-- Header -->
-  <header class="app-header">
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <ul class="navbar-nav">
-        <li class="nav-item d-block d-xl-none">
-          <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
-            <i class="ti ti-menu-2"></i>
-          </a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link nav-icon-hover" href="javascript:void(0)">
-            <i class="ti ti-bell-ringing"></i>
-            <div class="notification bg-primary rounded-circle"></div>
-          </a>
-        </li> -->
-      </ul>
-      <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-        <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-          
-          <li class="nav-item dropdown">
-            <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
-               aria-expanded="false">
-              <img src="<?= base_url('assets/img/user-1.jpg'); ?>" alt="" width="40" height="40" class="rounded-circle" style="border: 3px solid #fff">
-            </a>
-            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-              <div class="message-body">
-                <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                  <i class="ti ti-user fs-6"></i>
-                  <p class="mb-0 fs-3">My Profile</p>
-                </a>
-                <a href="<?= base_url('auth/logout'); ?>" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
-              </div>
             </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+
+        </div>
+
+
+        <!-- ==================================================
+             USER PROFILE
+        ================================================== -->
+
+        <?php
+
+        $userName =
+            $this->session->userdata('name')
+            ?: 'Administrator';
+
+        $username =
+            $this->session->userdata('username')
+            ?: 'admin';
+
+        $initials = '';
+
+        $nameParts = preg_split(
+            '/\s+/',
+            trim($userName)
+        );
+
+        if (!empty($nameParts[0])) {
+
+            $initials .= strtoupper(
+                substr($nameParts[0], 0, 1)
+            );
+
+        }
+
+        if (
+            count($nameParts) > 1 &&
+            !empty($nameParts[count($nameParts)-1])
+        ) {
+
+            $initials .= strtoupper(
+                substr(
+                    $nameParts[count($nameParts)-1],
+                    0,
+                    1
+                )
+            );
+
+        }
+
+        ?>
+
+
+        <div class="sidebar-profile">
+
+            <div class="sidebar-profile__avatar">
+
+                <?= htmlspecialchars($initials); ?>
+
+            </div>
+
+
+            <div class="sidebar-profile__info">
+
+                <p class="sidebar-profile__name">
+
+                    <?= htmlspecialchars(
+                        strtoupper($userName)
+                    ); ?>
+
+                </p>
+
+
+                <p class="sidebar-profile__username">
+
+                    <?= htmlspecialchars(
+                        $username
+                    ); ?>
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             NAVIGATION
+        ================================================== -->
+
+        <nav
+            class="sidebar-nav scroll-sidebar"
+            data-simplebar="">
+
+
+            <ul id="sidebarnav">
+
+
+                <!-- ==================================================
+                     MAIN
+                ================================================== -->
+
+                <li class="sidebar-section-title">
+
+                    MAIN
+
+                </li>
+
+
+                <?php
+                $currentUri = trim(
+                    $this->uri->uri_string(),
+                    '/'
+                );
+
+                $dashboardActive =
+                    ($currentUri === 'dashboard' ||
+                     $currentUri === '');
+                ?>
+
+
+                <li class="sidebar-item">
+
+                    <a
+                        href="<?= base_url('dashboard'); ?>"
+                        class="sidebar-link <?= $dashboardActive ? 'active' : ''; ?>">
+
+                        <span class="sidebar-icon">
+
+                            <i class="ti ti-layout-dashboard"></i>
+
+                        </span>
+
+                        <span class="hide-menu">
+
+                            Dashboard
+
+                        </span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- ==================================================
+                     PROPERTY MANAGEMENT
+                ================================================== -->
+
+                <li class="sidebar-section-title">
+
+                    PROPERTY MANAGEMENT
+
+                </li>
+
+
+                <?php
+
+                $propertyActive =
+                    strpos(
+                        $currentUri,
+                        'properties'
+                    ) === 0;
+
+                ?>
+
+
+                <!-- PROPERTIES -->
+
+                <li class="sidebar-item">
+
+                    <a
+                        href="<?= base_url('properties'); ?>"
+                        class="sidebar-link <?= $propertyActive ? 'active' : ''; ?>">
+
+                        <span class="sidebar-icon">
+
+                            <i class="ti ti-building"></i>
+
+                        </span>
+
+                        <span class="hide-menu">
+
+                            Properties
+
+                        </span>
+
+                    </a>
+
+                </li>
+
+
+                <?php
+
+                $categoryActive =
+                    strpos(
+                        $currentUri,
+                        'property-categories'
+                    ) === 0;
+
+                ?>
+
+                <!-- CATEGORIES -->
+
+                <!-- <li class="sidebar-item">
+
+                    <a
+                        href="<?= base_url('property-categories'); ?>"
+                        class="sidebar-link <?= $categoryActive ? 'active' : ''; ?>">
+
+                        <span class="sidebar-icon">
+
+                            <i class="ti ti-category"></i>
+
+                        </span>
+
+                        <span class="hide-menu">
+
+                            Categories
+
+                        </span>
+
+                    </a>
+
+                </li> -->
+
+                <?php
+
+                $locationActive =
+                    strpos(
+                        $currentUri,
+                        'property-locations'
+                    ) === 0;
+
+                ?>
+
+                <!-- LOCATIONS -->
+
+                <!-- <li class="sidebar-item">
+
+                    <a
+                        href="<?= base_url('property-locations'); ?>"
+                        class="sidebar-link <?= $locationActive ? 'active' : ''; ?>">
+
+                        <span class="sidebar-icon">
+
+                            <i class="ti ti-map-pin"></i>
+
+                        </span>
+
+                        <span class="hide-menu">
+
+                            Locations
+
+                        </span>
+
+                    </a>
+
+                </li> -->
+
+
+                <!-- ==================================================
+                     SYSTEM
+                ================================================== -->
+
+                <!-- <li class="sidebar-section-title">
+                    SYSTEM
+                </li> -->
+
+                <?php
+
+                $usersActive =
+                    strpos(
+                        $currentUri,
+                        'users'
+                    ) === 0;
+
+                ?>
+
+                <!-- <li class="sidebar-item">
+
+                    <a
+                        href="<?= base_url('users'); ?>"
+                        class="sidebar-link <?= $usersActive ? 'active' : ''; ?>">
+
+                        <span class="sidebar-icon">
+
+                            <i class="ti ti-users"></i>
+
+                        </span>
+
+                        <span class="hide-menu">
+
+                            Users
+
+                        </span>
+
+                    </a>
+
+                </li> -->
+
+            </ul>
+
+        </nav>
+
+
+        <!-- ==================================================
+             LOGOUT
+        ================================================== -->
+
+        <div class="sidebar-bottom">
+
+            <a
+                href="<?= base_url('auth/logout'); ?>"
+                class="sidebar-logout">
+
+                <i class="ti ti-logout"></i>
+
+                <span>
+
+                    Logout
+
+                </span>
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</aside>
+
+
+<!-- ==========================================================
+     BODY WRAPPER
+========================================================== -->
+
+<div class="body-wrapper">
+
+
+    <!-- ==================================================
+         HEADER
+    ================================================== -->
+
+    <header class="app-header">
+
+        <nav class="navbar navbar-expand-lg navbar-light">
+
+
+            <!-- MOBILE TOGGLE -->
+
+            <ul class="navbar-nav">
+
+                <li class="nav-item d-block d-xl-none">
+
+                    <a
+                        class="nav-link nav-icon-hover sidebartoggler"
+                        id="headerCollapse"
+                        href="javascript:void(0)">
+
+                        <i class="ti ti-menu-2"></i>
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+
+            <!-- ==================================================
+                 RIGHT HEADER
+            ================================================== -->
+
+            <div
+                class="navbar-collapse justify-content-end px-0"
+                id="navbarNav">
+
+                <ul
+                    class="navbar-nav flex-row ms-auto align-items-center">
+
+
+                    <li class="nav-item dropdown">
+
+                        <a
+                            class="nav-link nav-icon-hover"
+                            href="javascript:void(0)"
+                            id="drop2"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+
+
+                            <div class="header-profile">
+
+                                <div class="header-profile__avatar">
+
+                                    <?= htmlspecialchars(
+                                        $initials
+                                    ); ?>
+
+                                </div>
+
+
+                                <span class="header-profile__name">
+
+                                    <?= htmlspecialchars(
+                                        strtoupper($userName)
+                                    ); ?>
+
+                                </span>
+
+
+                                <i class="ti ti-chevron-down"></i>
+
+                            </div>
+
+
+                        </a>
+
+
+                        <div
+                            class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up header-profile-menu"
+                            aria-labelledby="drop2">
+
+
+                            <div class="message-body">
+
+
+                                <!-- PROFILE -->
+
+                                <div
+                                    class="px-3 py-2 mb-1">
+
+                                    <div
+                                        style="
+                                            font-size:12px;
+                                            color:#94a3b8;
+                                        ">
+
+                                        Signed in as
+
+                                    </div>
+
+                                    <div
+                                        style="
+                                            font-size:13px;
+                                            font-weight:700;
+                                            color:#071b3a;
+                                        ">
+
+                                        <?= htmlspecialchars(
+                                            $username
+                                        ); ?>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- MY PROFILE -->
+
+                                <a
+                                    href="<?= base_url('users/profile'); ?>"
+                                    class="dropdown-item d-flex align-items-center gap-2">
+
+                                    <i class="ti ti-user fs-5"></i>
+
+                                    <span>
+
+                                        My Profile
+
+                                    </span>
+
+                                </a>
+
+
+                                <!-- LOGOUT -->
+
+                                <a
+                                    href="<?= base_url('auth/logout'); ?>"
+                                    class="dropdown-item d-flex align-items-center gap-2 text-danger">
+
+                                    <i class="ti ti-logout fs-5"></i>
+
+                                    <span>
+
+                                        Logout
+
+                                    </span>
+
+                                </a>
+
+
+                            </div>
+
+                        </div>
+
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+
+        </nav>
+
+    </header>

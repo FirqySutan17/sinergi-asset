@@ -59,12 +59,12 @@ Hero Section
 
                 <div class="hero__button">
 
-                    <a href="#featured-property" class="btn-primary">
+                    <a href="<?= site_url('property');?>" class="btn-primary">
                         Explore Properties
                         <i class="bi bi-arrow-right ms-2"></i>
                     </a>
 
-                    <a href="#contact" class="btn-outline">
+                    <a href="https://wa.me/6281316874613?text=Hello%2C%20I%20would%20like%20to%20get%20a%20property%20consultation." target="_blank" rel="noopener noreferrer" class="btn-outline">
                         Contact Us
                     </a>
 
@@ -74,24 +74,22 @@ Hero Section
 
                     <div class="hero__highlight">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>Asset Management</span>
+                        <span>Professionalism</span>
                     </div>
 
                     <div class="hero__highlight">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>Property Consultant</span>
+                        <span>Integrity</span>
                     </div>
 
                     <div class="hero__highlight">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>Business Advisory</span>
+                        <span>Confidentiality</span>
                     </div>
 
                 </div>
 
             </div>
-
-
 
             <!-- ===========================
             Hero Card
@@ -104,38 +102,53 @@ Hero Section
 
                 <div class="hero-card">
 
-                    <h4>Our Expertise</h4>
+                    <h4>Asset Advisory & Transaction Services</h4>
 
                     <ul>
 
                         <li>
                             <i class="bi bi-check-circle-fill"></i>
-                            Asset Management
+                            Asset and Property Sales
                         </li>
 
                         <li>
                             <i class="bi bi-check-circle-fill"></i>
-                            Collateral Management
+                            Property leasing
                         </li>
 
                         <li>
                             <i class="bi bi-check-circle-fill"></i>
-                            Property Consultant
+                            Asset Marketing
                         </li>
 
                         <li>
                             <i class="bi bi-check-circle-fill"></i>
-                            Business Advisory
+                            Collateral asset management
                         </li>
 
                         <li>
                             <i class="bi bi-check-circle-fill"></i>
-                            Legal Advisory
+                            Transaction assistance
                         </li>
 
                         <li>
                             <i class="bi bi-check-circle-fill"></i>
-                            Real Estate Services
+                            Asset feasibility analysis
+                        </li>
+
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Property legality
+                        </li>
+
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Asset utilization strategies
+                        </li>
+
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Strategic Business and Management Consulting
                         </li>
 
                     </ul>
@@ -445,7 +458,7 @@ Why Choose Us
 Core Services
 ======================================================= -->
 
-<section class="services section" id="services">
+<!-- <section class="services section" id="services">
 
     <div class="container">
 
@@ -469,7 +482,6 @@ Core Services
 
         <div class="services__list">
 
-            <!-- 01 -->
             <div class="service-item">
 
                 <div class="service-item__number">
@@ -496,7 +508,6 @@ Core Services
 
             </div>
 
-            <!-- 02 -->
             <div class="service-item">
 
                 <div class="service-item__number">
@@ -523,7 +534,6 @@ Core Services
 
             </div>
 
-            <!-- 03 -->
             <div class="service-item">
 
                 <div class="service-item__number">
@@ -550,7 +560,6 @@ Core Services
 
             </div>
 
-            <!-- 04 -->
             <div class="service-item">
 
                 <div class="service-item__number">
@@ -577,7 +586,6 @@ Core Services
 
             </div>
 
-            <!-- 05 -->
             <div class="service-item">
 
                 <div class="service-item__number">
@@ -612,7 +620,7 @@ Core Services
 
 <div class="section-divider" style="background: #fff">
     <span></span>
-</div>
+</div> -->
 
 <!-- ======================================================
 Featured Properties
@@ -994,7 +1002,7 @@ Our Process
      CTA BANNER
 ========================================================== -->
 
-<section class="cta-banner">
+<section id="contact" class="cta-banner">
 
     <div class="container">
 
@@ -1038,8 +1046,11 @@ Our Process
 
             <div class="cta-banner__action">
 
-                <a href="#contact"
-                   class="btn btn-gold">
+                <a
+                    href="https://wa.me/6281316874613?text=Hello%2C%20I%20would%20like%20to%20get%20a%20property%20consultation."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-gold">
 
                     Get Consultation
 

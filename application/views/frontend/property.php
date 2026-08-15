@@ -1,3 +1,17 @@
+<style>
+    .property-pagination {
+        position: relative;
+        z-index: 9999;
+    }
+
+    .property-pagination__button {
+        position: relative;
+        z-index: 10000;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+    }
+</style>
+
 <section class="page-hero">
 
     <div class="container">
@@ -41,61 +55,187 @@
 
 </section>
 
+<!-- ==========================================================
+PROPERTY FILTER
+========================================================== -->
+
 <section class="property-filter">
 
     <div class="container">
 
-        <div class="property-filter__wrapper">
+        <form
+            action="<?= site_url('property'); ?>"
+            method="get"
+            class="property-filter__wrapper">
 
             <div class="row g-3 align-items-end">
 
+                <!-- KEYWORD -->
+
                 <div class="col-lg-5">
 
-                    <label>Keyword</label>
+                    <label>
+                        Keyword
+                    </label>
 
                     <input
                         type="text"
+                        name="keyword"
                         class="form-control"
-                        placeholder="Search property...">
+                        placeholder="Search property..."
+                        value="<?= htmlspecialchars(
+                            $filters['keyword'] ?? '',
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ); ?>">
 
                 </div>
+
+
+                <!-- CATEGORY -->
 
                 <div class="col-lg-3">
 
-                    <label>Category</label>
+                    <label>
+                        Category
+                    </label>
 
-                    <select class="form-select">
+                    <select
+                        name="category"
+                        class="form-select">
 
-                        <option>All Categories</option>
+                        <option value="">
+                            All Categories
+                        </option>
+
+                        <?php if (!empty($filter_categories)): ?>
+
+                            <?php foreach (
+                                $filter_categories
+                                as $category
+                            ): ?>
+
+                                <option
+                                    value="<?= (int) $category['id']; ?>"
+                                    <?= (
+                                        isset(
+                                            $filters['category']
+                                        ) &&
+                                        (string)
+                                            $filters['category']
+                                        ===
+                                        (string)
+                                            $category['id']
+                                    )
+                                        ? 'selected'
+                                        : ''; ?>>
+
+                                    <?= htmlspecialchars(
+                                        $category['name'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ); ?>
+
+                                </option>
+
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
 
                     </select>
 
                 </div>
 
+
+                <!-- LOCATION -->
+
                 <div class="col-lg-2">
 
-                    <label>Location</label>
+                    <label>
+                        Location
+                    </label>
 
-                    <select class="form-select">
+                    <select
+                        name="location"
+                        class="form-select">
 
-                        <option>All Location</option>
+                        <option value="">
+                            All Location
+                        </option>
+
+                        <?php if (!empty($filter_locations)): ?>
+
+                            <?php foreach (
+                                $filter_locations
+                                as $location
+                            ): ?>
+
+                                <option
+                                    value="<?= (int) $location['id']; ?>"
+                                    <?= (
+                                        isset(
+                                            $filters['location']
+                                        ) &&
+                                        (string)
+                                            $filters['location']
+                                        ===
+                                        (string)
+                                            $location['id']
+                                    )
+                                        ? 'selected'
+                                        : ''; ?>>
+
+                                    <?= htmlspecialchars(
+                                        $location['city'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ); ?>
+
+                                    <?php if (
+                                        !empty(
+                                            $location['province']
+                                        )
+                                    ): ?>
+
+                                        -
+                                        <?= htmlspecialchars(
+                                            $location['province'],
+                                            ENT_QUOTES,
+                                            'UTF-8'
+                                        ); ?>
+
+                                    <?php endif; ?>
+
+                                </option>
+
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
 
                     </select>
 
                 </div>
 
+
+                <!-- SEARCH -->
+
                 <div class="col-lg-2">
 
-                    <button class="btn btn-gold w-100">
+                    <button
+                        type="submit"
+                        class="btn btn-gold w-100">
+
                         <i class="bi bi-search me-2"></i>
+
                         Search
+
                     </button>
 
                 </div>
 
             </div>
 
-        </div>
+        </form>
 
     </div>
 
@@ -122,22 +262,101 @@ PROPERTY RESULT
                 </h2>
 
                 <p class="section-description">
-                    Showing <strong>9</strong> of <strong>24</strong> available properties.
+
+                    Showing
+                    <strong>
+                        <?= (int) (
+                            $pagination['total_properties'] ?? 0
+                        ); ?>
+                    </strong>
+                    available properties.
+
                 </p>
 
             </div>
 
             <div class="property-result-right">
 
-                <label>Sort by</label>
+                <form
+                    action="<?= site_url('property'); ?>"
+                    method="get">
 
-                <select class="form-select">
+                    <?php if (!empty($filters['keyword'])): ?>
 
-                    <option>Latest</option>
-                    <option>Name A-Z</option>
-                    <option>Name Z-A</option>
+                        <input
+                            type="hidden"
+                            name="keyword"
+                            value="<?= htmlspecialchars(
+                                $filters['keyword'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>">
 
-                </select>
+                    <?php endif; ?>
+
+
+                    <?php if (!empty($filters['category'])): ?>
+
+                        <input
+                            type="hidden"
+                            name="category"
+                            value="<?= (int) $filters['category']; ?>">
+
+                    <?php endif; ?>
+
+
+                    <?php if (!empty($filters['location'])): ?>
+
+                        <input
+                            type="hidden"
+                            name="location"
+                            value="<?= (int) $filters['location']; ?>">
+
+                    <?php endif; ?>
+
+
+                    <label>
+                        Sort by
+                    </label>
+
+                    <select
+                        name="sort"
+                        class="form-select"
+                        onchange="this.form.submit();">
+
+                        <option
+                            value="latest"
+                            <?= ($filters['sort'] ?? 'latest') === 'latest'
+                                ? 'selected'
+                                : ''; ?>>
+
+                            Latest
+
+                        </option>
+
+                        <option
+                            value="name_asc"
+                            <?= ($filters['sort'] ?? '') === 'name_asc'
+                                ? 'selected'
+                                : ''; ?>>
+
+                            Name A-Z
+
+                        </option>
+
+                        <option
+                            value="name_desc"
+                            <?= ($filters['sort'] ?? '') === 'name_desc'
+                                ? 'selected'
+                                : ''; ?>>
+
+                            Name Z-A
+
+                        </option>
+
+                    </select>
+
+                </form>
 
             </div>
 
@@ -151,12 +370,21 @@ PROPERTY RESULT
 FEATURED PROPERTY BANNER
 ========================================================== -->
 
+<?php if (!empty($featured_property)): ?>
+
 <section class="property-featured-banner">
 
     <div class="container">
 
-        <a href="<?= site_url('property-detail'); ?>"
-           class="property-featured-banner__wrapper">
+        <a
+            href="<?= site_url(
+                'property/' .
+                $featured_property['slug']
+            ); ?>"
+            class="property-featured-banner__wrapper">
+
+
+            <!-- CONTENT -->
 
             <div class="property-featured-banner__content">
 
@@ -164,25 +392,74 @@ FEATURED PROPERTY BANNER
 
                     <i class="bi bi-star-fill"></i>
 
-                    <span>FEATURED PROPERTY</span>
+                    <span>
+                        FEATURED PROPERTY
+                    </span>
 
                 </div>
 
+
                 <div class="property-featured-banner__info">
 
-                    <h3>Premium Office Tower</h3>
+                    <h3>
+
+                        <?= htmlspecialchars(
+                            $featured_property['title'],
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ); ?>
+
+                    </h3>
+
 
                     <div class="property-featured-banner__meta">
 
                         <span>
+
                             <i class="bi bi-geo-alt"></i>
-                            South Jakarta
+
+                            <?= htmlspecialchars(
+                                $featured_property['city']
+                                    ?? '',
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>
+
+                            <?php if (
+                                !empty(
+                                    $featured_property['province']
+                                )
+                            ): ?>
+
+                                ,
+                                <?= htmlspecialchars(
+                                    $featured_property['province'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ); ?>
+
+                            <?php endif; ?>
+
                         </span>
 
-                        <span class="property-featured-banner__dot"></span>
+
+                        <span
+                            class="property-featured-banner__dot">
+                        </span>
+
 
                         <span>
-                            Grade A Office
+
+                            <?= htmlspecialchars(
+                                $featured_property['asset_class']
+                                    ?: (
+                                        $featured_property['asset_type']
+                                        ?: 'Property Asset'
+                                    ),
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>
+
                         </span>
 
                     </div>
@@ -191,11 +468,17 @@ FEATURED PROPERTY BANNER
 
             </div>
 
+
+            <!-- ACTION -->
+
             <div class="property-featured-banner__action">
 
-                <span>Explore Property</span>
+                <span>
+                    Explore Property
+                </span>
 
-                <div class="property-featured-banner__arrow">
+                <div
+                    class="property-featured-banner__arrow">
 
                     <i class="bi bi-arrow-up-right"></i>
 
@@ -203,77 +486,14 @@ FEATURED PROPERTY BANNER
 
             </div>
 
+
         </a>
 
     </div>
 
 </section>
 
-<!-- ==========================================================
-PROPERTY GRID
-========================================================== -->
-
-<?php
-
-$properties = [
-
-    [
-        'title'     => 'Premium Office Tower',
-        'category'  => 'Commercial Office',
-        'location'  => 'South Jakarta',
-        'class'     => 'Grade A Office',
-        'label'     => 'Premium Asset',
-        'image'     => 'hero-building.jpg'
-    ],
-
-    [
-        'title'     => 'Cikarang Logistics Hub',
-        'category'  => 'Industrial Asset',
-        'location'  => 'Bekasi',
-        'class'     => 'Modern Warehouse',
-        'label'     => 'Industrial Asset',
-        'image'     => 'hero-building.jpg'
-    ],
-
-    [
-        'title'     => 'BSD Business Park',
-        'category'  => 'Business Property',
-        'location'  => 'Tangerang',
-        'class'     => 'Business Complex',
-        'label'     => 'Commercial Asset',
-        'image'     => 'hero-building.jpg'
-    ],
-
-    [
-        'title'     => 'Strategic Commercial Land',
-        'category'  => 'Commercial Land',
-        'location'  => 'Tangerang',
-        'class'     => 'Development Land',
-        'label'     => 'Investment Asset',
-        'image'     => 'hero-building.jpg'
-    ],
-
-    [
-        'title'     => 'Premium Retail Center',
-        'category'  => 'Retail Space',
-        'location'  => 'Jakarta',
-        'class'     => 'Commercial Retail',
-        'label'     => 'Commercial Asset',
-        'image'     => 'hero-building.jpg'
-    ],
-
-    [
-        'title'     => 'Integrated Mixed-Use Building',
-        'category'  => 'Mixed Use',
-        'location'  => 'Surabaya',
-        'class'     => 'Office & Retail',
-        'label'     => 'Premium Asset',
-        'image'     => 'hero-building.jpg'
-    ]
-
-];
-
-?>
+<?php endif; ?>
 
 <!-- ==========================================================
 PROPERTY GRID
@@ -285,118 +505,174 @@ PROPERTY GRID
 
         <div class="row gx-4 gy-5">
 
-            <?php foreach ($properties as $property): ?>
+            <?php if (!empty($properties)): ?>
 
-                <div class="col-lg-4 col-md-6">
+                <?php foreach ($properties as $property): ?>
 
-                    <a href="<?= site_url('property-detail'); ?>"
-                       class="property-card">
+                    <div class="col-lg-4 col-md-6">
 
-                        <!-- Image -->
+                        <a
+                            href="<?= site_url(
+                                'property/' .
+                                $property['slug']
+                            ); ?>"
+                            class="property-card">
 
-                        <div class="property-card__image">
+                            <!-- IMAGE -->
 
-                            <img
-                                src="<?= base_url(
-                                    'assets/frontend/img/' .
-                                    $property['image']
-                                ); ?>"
-                                alt="<?= htmlspecialchars(
-                                    $property['title'],
-                                    ENT_QUOTES,
-                                    'UTF-8'
-                                ); ?>">
+                            <div class="property-card__image">
 
-                            <div class="property-card__overlay"></div>
+                                <img
+                                    src="<?= !empty($property['thumbnail'])
+                                        ? base_url(
+                                            $property['thumbnail']
+                                        )
+                                        : base_url(
+                                            'assets/frontend/img/property/default.jpg'
+                                        ); ?>"
+                                    alt="<?= htmlspecialchars(
+                                        $property['title'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ); ?>"
+                                    loading="lazy"
+                                    onerror="this.src='<?= base_url(
+                                        'assets/frontend/img/property/default.jpg'
+                                    ); ?>';">
 
-                        </div>
+                                <div class="property-card__overlay"></div>
 
-
-                        <!-- Floating Category -->
-
-                        <div class="property-card__category">
-
-                            <?= htmlspecialchars(
-                                $property['category'],
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ); ?>
-
-                        </div>
+                            </div>
 
 
-                        <!-- Content -->
+                            <!-- CATEGORY -->
 
-                        <div class="property-card__content">
-
-                            <span class="property-card__label">
+                            <div class="property-card__category">
 
                                 <?= htmlspecialchars(
-                                    $property['label'],
+                                    $property['category_name']
+                                        ?? 'Property',
                                     ENT_QUOTES,
                                     'UTF-8'
                                 ); ?>
 
-                            </span>
-
-                            <h3 class="property-card__title">
-
-                                <?= htmlspecialchars(
-                                    $property['title'],
-                                    ENT_QUOTES,
-                                    'UTF-8'
-                                ); ?>
-
-                            </h3>
+                            </div>
 
 
-                            <div class="property-card__location">
+                            <!-- CONTENT -->
 
-                                <i class="bi bi-geo-alt-fill"></i>
+                            <div class="property-card__content">
 
-                                <span>
+
+                                <!-- LABEL -->
+
+                                <span class="property-card__label">
 
                                     <?= htmlspecialchars(
-                                        $property['location'],
+                                        $property['asset_class']
+                                            ?: 'Property Asset',
                                         ENT_QUOTES,
                                         'UTF-8'
                                     ); ?>
 
                                 </span>
 
-                            </div>
+
+                                <!-- TITLE -->
+
+                                <h3 class="property-card__title">
+
+                                    <?= htmlspecialchars(
+                                        $property['title'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ); ?>
+
+                                </h3>
 
 
-                            <!-- <div class="property-card__meta">
+                                <!-- LOCATION -->
 
-                                <?= htmlspecialchars(
-                                    $property['class'],
-                                    ENT_QUOTES,
-                                    'UTF-8'
-                                ); ?>
+                                <div class="property-card__location">
 
-                            </div> -->
+                                    <i class="bi bi-geo-alt-fill"></i>
 
+                                    <span>
 
-                            <div class="property-card__footer">
+                                        <?= htmlspecialchars(
+                                            $property['city'] ?? '',
+                                            ENT_QUOTES,
+                                            'UTF-8'
+                                        ); ?>
 
-                                <span>View Property</span>
+                                        <?php if (
+                                            !empty(
+                                                $property['province']
+                                            )
+                                        ): ?>
 
-                                <div class="property-card__arrow">
+                                            ,
+                                            <?= htmlspecialchars(
+                                                $property['province'],
+                                                ENT_QUOTES,
+                                                'UTF-8'
+                                            ); ?>
 
-                                    <i class="bi bi-arrow-up-right"></i>
+                                        <?php endif; ?>
+
+                                    </span>
 
                                 </div>
 
+
+                                <!-- FOOTER -->
+
+                                <div class="property-card__footer">
+
+                                    <span>
+                                        View Property
+                                    </span>
+
+                                    <div
+                                        class="property-card__arrow">
+
+                                        <i
+                                            class="bi bi-arrow-up-right">
+                                        </i>
+
+                                    </div>
+
+                                </div>
+
+
                             </div>
 
-                        </div>
+                        </a>
 
-                    </a>
+                    </div>
+
+                <?php endforeach; ?>
+
+            <?php else: ?>
+
+                <div class="col-12">
+
+                    <div class="text-center py-5">
+
+                        <h4>
+                            No Properties Available
+                        </h4>
+
+                        <p>
+                            There are currently no properties
+                            available in our portfolio.
+                        </p>
+
+                    </div>
 
                 </div>
 
-            <?php endforeach; ?>
+            <?php endif; ?>
 
         </div>
 
@@ -408,59 +684,199 @@ PROPERTY GRID
 PROPERTY PAGINATION
 ========================================================== -->
 
-<nav class="property-pagination"
-     aria-label="Property pagination">
+<?php
 
-    <a href="#"
-       class="property-pagination__button property-pagination__arrow"
-       aria-label="Previous page">
+$current_page =
+    (int) ($pagination['current_page'] ?? 1);
 
-        <i class="bi bi-chevron-left"></i>
+$total_pages =
+    (int) ($pagination['total_pages'] ?? 1);
 
-    </a>
 
-    <a href="#"
-       class="property-pagination__button active">
+/*
+|--------------------------------------------------------------------------
+| BUILD PAGINATION URL
+|--------------------------------------------------------------------------
+*/
 
-        1
+$build_page_url = function ($page) {
 
-    </a>
+    $params = $_GET;
 
-    <a href="#"
-       class="property-pagination__button">
+    $params['page'] = $page;
 
-        2
+    return site_url('property')
+        . '?'
+        . http_build_query($params);
+};
 
-    </a>
+?>
 
-    <a href="#"
-       class="property-pagination__button">
 
-        3
+<?php if ($total_pages > 1): ?>
 
-    </a>
+<nav
+    class="property-pagination"
+    aria-label="Property pagination">
 
-    <span class="property-pagination__dots">
 
-        ...
+    <!-- PREVIOUS -->
 
-    </span>
+    <?php if ($current_page > 1): ?>
 
-    <a href="#"
-       class="property-pagination__button">
+        <a
+            href="<?= htmlspecialchars(
+                $build_page_url(
+                    $current_page - 1
+                ),
+                ENT_QUOTES,
+                'UTF-8'
+            ); ?>"
+            class="property-pagination__button property-pagination__arrow"
+            aria-label="Previous page">
 
-        8
+            <i class="bi bi-chevron-left"></i>
 
-    </a>
+        </a>
 
-    <a href="#"
-       class="property-pagination__button property-pagination__arrow"
-       aria-label="Next page">
+    <?php else: ?>
 
-        <i class="bi bi-chevron-right"></i>
+        <span
+            class="property-pagination__button property-pagination__arrow disabled"
+            aria-disabled="true">
 
-    </a>
+            <i class="bi bi-chevron-left"></i>
+
+        </span>
+
+    <?php endif; ?>
+
+
+    <!-- PAGE NUMBERS -->
+
+    <?php for (
+        $page = 1;
+        $page <= $total_pages;
+        $page++
+    ): ?>
+
+        <?php if ($page === $current_page): ?>
+
+            <span
+                class="property-pagination__button active"
+                aria-current="page">
+
+                <?= $page; ?>
+
+            </span>
+
+        <?php else: ?>
+
+            <a
+                href="<?= htmlspecialchars(
+                    $build_page_url($page),
+                    ENT_QUOTES,
+                    'UTF-8'
+                ); ?>"
+                class="property-pagination__button">
+
+                <?= $page; ?>
+
+            </a>
+
+        <?php endif; ?>
+
+    <?php endfor; ?>
+
+
+    <!-- NEXT -->
+
+    <?php if ($current_page < $total_pages): ?>
+
+        <a
+            href="<?= htmlspecialchars(
+                $build_page_url(
+                    $current_page + 1
+                ),
+                ENT_QUOTES,
+                'UTF-8'
+            ); ?>"
+            class="property-pagination__button property-pagination__arrow"
+            aria-label="Next page">
+
+            <i class="bi bi-chevron-right"></i>
+
+        </a>
+
+    <?php else: ?>
+
+        <span
+            class="property-pagination__button property-pagination__arrow disabled"
+            aria-disabled="true">
+
+            <i class="bi bi-chevron-right"></i>
+
+        </span>
+
+    <?php endif; ?>
+
 
 </nav>
+
+<?php endif; ?>
+
+<script>
+    document.addEventListener(
+        'DOMContentLoaded',
+        function () {
+
+            const sort =
+                document.getElementById(
+                    'propertySort'
+                );
+
+
+            if (!sort) {
+                return;
+            }
+
+
+            sort.addEventListener(
+                'change',
+                function () {
+
+                    const url =
+                        new URL(
+                            window.location.href
+                        );
+
+
+                    if (
+                        this.value === 'latest'
+                    ) {
+
+                        url.searchParams.delete(
+                            'sort'
+                        );
+
+                    } else {
+
+                        url.searchParams.set(
+                            'sort',
+                            this.value
+                        );
+
+                    }
+
+
+                    window.location.href =
+                        url.toString();
+
+                }
+            );
+
+        }
+    );
+</script>
 
 
