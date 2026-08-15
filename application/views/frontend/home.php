@@ -455,174 +455,6 @@ Why Choose Us
 </div>
 
 <!-- ======================================================
-Core Services
-======================================================= -->
-
-<!-- <section class="services section" id="services">
-
-    <div class="container">
-
-        <div class="section-heading text-center"
-             data-aos="fade-up">
-
-            <span class="section-subtitle">
-
-                OUR SERVICES
-
-            </span>
-
-            <h2 class="section-title">
-
-                Comprehensive Business
-                Solutions
-
-            </h2>
-
-        </div>
-
-        <div class="services__list">
-
-            <div class="service-item">
-
-                <div class="service-item__number">
-                    01
-                </div>
-
-                <div class="service-item__content">
-
-                    <h3>
-                        Strategic Business & Management Consulting
-                    </h3>
-
-                    <p>
-                        Helping organizations improve operational efficiency,
-                        strengthen decision-making, mitigate risks, and achieve
-                        sustainable business growth through strategic consulting.
-                    </p>
-
-                </div>
-
-                <div class="service-item__arrow">
-                    <i class="bi bi-arrow-up-right"></i>
-                </div>
-
-            </div>
-
-            <div class="service-item">
-
-                <div class="service-item__number">
-                    02
-                </div>
-
-                <div class="service-item__content">
-
-                    <h3>
-                        Asset & Collateral Management
-                    </h3>
-
-                    <p>
-                        Professional management of corporate assets and collateral,
-                        covering identification, monitoring, optimization, security,
-                        and utilization strategies.
-                    </p>
-
-                </div>
-
-                <div class="service-item__arrow">
-                    <i class="bi bi-arrow-up-right"></i>
-                </div>
-
-            </div>
-
-            <div class="service-item">
-
-                <div class="service-item__number">
-                    03
-                </div>
-
-                <div class="service-item__content">
-
-                    <h3>
-                        Account Receivable & Recovery Solution
-                    </h3>
-
-                    <p>
-                        Supporting businesses with receivable recovery, settlement
-                        negotiation, payment monitoring, and non-performing asset
-                        resolution through strategic recovery solutions.
-                    </p>
-
-                </div>
-
-                <div class="service-item__arrow">
-                    <i class="bi bi-arrow-up-right"></i>
-                </div>
-
-            </div>
-
-            <div class="service-item">
-
-                <div class="service-item__number">
-                    04
-                </div>
-
-                <div class="service-item__content">
-
-                    <h3>
-                        Legal Advisory & Corporate Legal Support
-                    </h3>
-
-                    <p>
-                        Providing comprehensive legal advisory services including
-                        contract review, legal opinions, corporate compliance,
-                        dispute resolution, and risk mitigation.
-                    </p>
-
-                </div>
-
-                <div class="service-item__arrow">
-                    <i class="bi bi-arrow-up-right"></i>
-                </div>
-
-            </div>
-
-            <div class="service-item">
-
-                <div class="service-item__number">
-                    05
-                </div>
-
-                <div class="service-item__content">
-
-                    <h3>
-                        Real Estate, Property & Investment Management
-                    </h3>
-
-                    <p>
-                        Delivering integrated property services including leasing,
-                        asset marketing, valuation, property advisory, and investment
-                        optimization strategies.
-                    </p>
-
-                </div>
-
-                <div class="service-item__arrow">
-                    <i class="bi bi-arrow-up-right"></i>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<div class="section-divider" style="background: #fff">
-    <span></span>
-</div> -->
-
-<!-- ======================================================
 Featured Properties
 ======================================================= -->
 
@@ -647,167 +479,249 @@ Featured Properties
 
         </div>
 
-        <div class="featured-grid">
-            <a href="<?= site_url('property/detail');?>"
-            class="featured-card featured-card--large">
 
-                <div class="featured-card__image">
+        <?php if (!empty($featured_properties)): ?>
 
-                    <img src="<?= base_url('assets/frontend/img/hero-building.jpg');?>">
+            <?php
+            $featured_first = $featured_properties[0];
+            $featured_side = array_slice(
+                $featured_properties,
+                1,
+                2
+            );
+            ?>
 
-                </div>
 
-                <div class="featured-card__overlay"></div>
+            <div class="featured-grid">
 
-                <div class="featured-card__content">
+                <!-- ==================================================
+                FEATURED LARGE
+                ================================================== -->
 
-                    <span class="featured-card__badge">
+                <a
+                    href="<?= site_url(
+                        'property/' .
+                        $featured_first['slug']
+                    ); ?>"
+                    class="featured-card featured-card--large">
 
-                        Commercial Office
+                    <div class="featured-card__image">
 
-                    </span>
-
-                    <h3>
-
-                        Premium Office Tower
-
-                    </h3>
-
-                    <p>
-
-                        South Jakarta
-
-                    </p>
-
-                    <div class="featured-card__footer">
-
-                        <span>
-
-                            View Property
-
-                        </span>
-
-                        <i class="bi bi-arrow-up-right"></i>
+                        <img
+                            src="<?= !empty(
+                                $featured_first['thumbnail']
+                            )
+                                ? base_url(
+                                    $featured_first['thumbnail']
+                                )
+                                : base_url(
+                                    'assets/frontend/img/hero-building.jpg'
+                                ); ?>"
+                            alt="<?= htmlspecialchars(
+                                $featured_first['title'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>">
 
                     </div>
 
+                    <div class="featured-card__overlay"></div>
+
+                    <div class="featured-card__content">
+
+                        <span class="featured-card__badge">
+
+                            <?= htmlspecialchars(
+                                $featured_first['category_name']
+                                    ?? 'Property',
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>
+
+                        </span>
+
+
+                        <h3>
+
+                            <?= htmlspecialchars(
+                                $featured_first['title'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>
+
+                        </h3>
+
+
+                        <p>
+
+                            <?= htmlspecialchars(
+                                $featured_first['city']
+                                    ?? '',
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>
+
+                        </p>
+
+
+                        <div class="featured-card__footer">
+
+                            <span>
+
+                                View Property
+
+                            </span>
+
+                            <i class="bi bi-arrow-up-right"></i>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+
+                <!-- ==================================================
+                FEATURED RIGHT
+                ================================================== -->
+
+                <div class="featured-right">
+
+                    <?php foreach (
+                        $featured_side
+                        as $featured
+                    ): ?>
+
+                        <a
+                            href="<?= site_url(
+                                'property/' .
+                                $featured['slug']
+                            ); ?>"
+                            class="featured-card">
+
+                            <div class="featured-card__image">
+
+                                <img
+                                    src="<?= !empty(
+                                        $featured['thumbnail']
+                                    )
+                                        ? base_url(
+                                            $featured['thumbnail']
+                                        )
+                                        : base_url(
+                                            'assets/frontend/img/hero-building.jpg'
+                                        ); ?>"
+                                    alt="<?= htmlspecialchars(
+                                        $featured['title'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ); ?>">
+
+                            </div>
+
+                            <div class="featured-card__overlay"></div>
+
+                            <div class="featured-card__content">
+
+                                <span class="featured-card__badge">
+
+                                    <?= htmlspecialchars(
+                                        $featured['category_name']
+                                            ?? 'Property',
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ); ?>
+
+                                </span>
+
+
+                                <h3>
+
+                                    <?= htmlspecialchars(
+                                        $featured['title'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ); ?>
+
+                                </h3>
+
+
+                                <p>
+
+                                    <?= htmlspecialchars(
+                                        $featured['city']
+                                            ?? '',
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ); ?>
+
+                                </p>
+
+
+                                <div class="featured-card__footer">
+
+                                    <span>
+
+                                        View Property
+
+                                    </span>
+
+                                    <i class="bi bi-arrow-up-right"></i>
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    <?php endforeach; ?>
+
                 </div>
+
+            </div>
+
+
+        <?php else: ?>
+
+            <!-- ==================================================
+            NO FEATURED PROPERTY
+            ================================================== -->
+
+            <div class="text-center py-5">
+
+                <p>
+
+                    No featured properties available.
+
+                </p>
+
+            </div>
+
+        <?php endif; ?>
+
+
+        <!-- ==================================================
+        BOTTOM CTA
+        ================================================== -->
+
+        <div class="featured-bottom">
+
+            <p>
+
+                Explore our complete portfolio of commercial properties,
+                managed assets, and investment opportunities.
+
+            </p>
+
+            <a
+                href="<?= site_url('property'); ?>"
+                class="btn-primary">
+
+                View All Properties
 
             </a>
 
-            <div class="featured-right">
-
-                <!-- Warehouse -->
-
-                <a href="<?= site_url('property/detail');?>"
-                class="featured-card">
-
-                    <div class="featured-card__image">
-
-                        <img src="<?= base_url('assets/frontend/img/hero-building.jpg');?>">
-
-                    </div>
-
-                    <div class="featured-card__overlay"></div>
-
-                    <div class="featured-card__content">
-
-                        <span class="featured-card__badge">
-
-                            Industrial Asset
-
-                        </span>
-
-                        <h3>
-
-                            Premium Warehouse
-
-                        </h3>
-
-                        <p>
-
-                            Bekasi
-
-                        </p>
-
-                        <div class="featured-card__footer">
-
-                            <span>
-
-                                View Property
-
-                            </span>
-
-                            <i class="bi bi-arrow-up-right"></i>
-
-                        </div>
-
-                    </div>
-
-                </a>
-
-                <!-- Land -->
-
-                <a href="<?= site_url('property/detail');?>"
-                class="featured-card">
-
-                    <div class="featured-card__image">
-
-                        <img src="<?= base_url('assets/frontend/img/hero-building.jpg');?>">
-
-                    </div>
-
-                    <div class="featured-card__overlay"></div>
-
-                    <div class="featured-card__content">
-
-                        <span class="featured-card__badge">
-
-                            Investment Property
-
-                        </span>
-
-                        <h3>
-
-                            Commercial Land
-
-                        </h3>
-
-                        <p>
-
-                            Tangerang
-
-                        </p>
-
-                        <div class="featured-card__footer">
-
-                            <span>
-
-                                View Property
-
-                            </span>
-
-                            <i class="bi bi-arrow-up-right"></i>
-
-                        </div>
-
-                    </div>
-
-                </a>
-
-            </div>
         </div>
-
-    <div class="featured-bottom">
-
-        <p>
-            Explore our complete portfolio of commercial properties,
-            managed assets, and investment opportunities.
-        </p>
-
-        <a href="<?= site_url('property');?>" class="btn-primary">
-            View All Properties
-        </a>
 
     </div>
 

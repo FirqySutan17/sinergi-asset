@@ -373,6 +373,62 @@ class Property_model extends CI_Model
 
     /**
      * ==========================================================
+     * GET FEATURED PROPERTIES FOR HOME
+     * ==========================================================
+     */
+    public function get_featured_properties_home()
+    {
+        return $this->db
+            ->select('
+                p.id,
+                p.title,
+                p.slug,
+                p.thumbnail,
+                p.featured,
+                p.status,
+
+                pc.name AS category_name,
+
+                pl.city,
+                pl.province
+            ')
+            ->from('properties p')
+
+            ->join(
+                'property_categories pc',
+                'pc.id = p.category_id',
+                'left'
+            )
+
+            ->join(
+                'property_locations pl',
+                'pl.id = p.location_id',
+                'left'
+            )
+
+            ->where(
+                'p.featured',
+                1
+            )
+
+            ->where(
+                'p.status',
+                'available'
+            )
+
+            ->order_by(
+                'p.created_at',
+                'DESC'
+            )
+
+            ->limit(3)
+
+            ->get()
+            ->result_array();
+    }
+
+    /**
+     * ==========================================================
      * GET PROPERTY DETAIL BY SLUG
      * ==========================================================
      */
