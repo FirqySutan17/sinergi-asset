@@ -20,6 +20,7 @@ class Properties_model extends CI_Model
                 p.slug,
                 p.asset_class,
                 p.asset_type,
+                p.price,
                 p.thumbnail,
                 p.featured,
                 p.status,

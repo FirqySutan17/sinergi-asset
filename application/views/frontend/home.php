@@ -4,154 +4,67 @@ Hero Section
 
 <section class="hero" id="hero">
 
-    <!-- Hero Background -->
-
+    <!-- Background -->
     <div class="hero__background">
-
-        <img src="<?= base_url('assets/frontend/img/hero-building.jpg'); ?>"
-             alt="PT Sinergi Aset Jagat Integrasi">
-
+        <img
+            src="<?= base_url('assets/frontend/img/hero-building.jpg'); ?>"
+            alt="PT Sinergi Aset Jagat Integrasi">
     </div>
 
     <!-- Overlay -->
-
     <div class="hero__overlay"></div>
 
     <div class="container">
 
         <div class="hero__wrapper">
 
-            <!-- ===========================
-            Hero Content
-            ============================ -->
-
             <div class="hero__content">
 
                 <span
                     class="hero__subtitle"
                     data-aos="fade-up">
-
                     PT SINERGI ASET JAGAT INTEGRASI
-
                 </span>
 
                 <h1
                     class="hero__title"
                     data-aos="fade-up"
                     data-aos-delay="100">
-
-                    Integrated Asset <br>
-
-                    Management & <br>
-
-                    Property Consultant
-
+                    Integrated Asset
+                    Management &
+                    Property Solutions
                 </h1>
 
                 <p
                     class="hero__description"
                     data-aos="fade-up"
                     data-aos-delay="200">
-
-                    Delivering integrated solutions in asset management, collateral management, property consulting, business advisory, legal advisory, and real estate services with professionalism, integrity, and trusted expertise.
-
+                    Integrated solutions for asset management,
+                    property, business, and advisory services
+                    with professionalism and integrity.
                 </p>
 
-                <div class="hero__button">
+                <div
+                    class="hero__button"
+                    data-aos="fade-up"
+                    data-aos-delay="300">
 
-                    <a href="<?= site_url('property');?>" class="btn-primary">
+                    <a
+                        href="<?= site_url('property'); ?>"
+                        class="btn-primary">
                         Explore Properties
                         <i class="bi bi-arrow-right ms-2"></i>
                     </a>
 
-                    <a href="https://wa.me/6281316874613?text=Hello%2C%20I%20would%20like%20to%20get%20a%20property%20consultation." target="_blank" rel="noopener noreferrer" class="btn-outline">
+                    <a
+                        href="https://wa.me/6281316874613?text=<?= rawurlencode(
+                            'Hello, I would like to get a property consultation.'
+                        ); ?>"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-outline">
                         Contact Us
                     </a>
-
-                </div>
-
-                <div class="hero__highlights">
-
-                    <div class="hero__highlight">
-                        <i class="bi bi-check-circle-fill"></i>
-                        <span>Professionalism</span>
-                    </div>
-
-                    <div class="hero__highlight">
-                        <i class="bi bi-check-circle-fill"></i>
-                        <span>Integrity</span>
-                    </div>
-
-                    <div class="hero__highlight">
-                        <i class="bi bi-check-circle-fill"></i>
-                        <span>Confidentiality</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- ===========================
-            Hero Card
-            ============================ -->
-
-            <div
-                class="hero__card"
-                data-aos="fade-left"
-                data-aos-delay="400">
-
-                <div class="hero-card">
-
-                    <h4>Asset Advisory & Transaction Services</h4>
-
-                    <ul>
-
-                        <li>
-                            <i class="bi bi-check-circle-fill"></i>
-                            Asset and Property Sales
-                        </li>
-
-                        <li>
-                            <i class="bi bi-check-circle-fill"></i>
-                            Property leasing
-                        </li>
-
-                        <li>
-                            <i class="bi bi-check-circle-fill"></i>
-                            Asset Marketing
-                        </li>
-
-                        <li>
-                            <i class="bi bi-check-circle-fill"></i>
-                            Collateral asset management
-                        </li>
-
-                        <li>
-                            <i class="bi bi-check-circle-fill"></i>
-                            Transaction assistance
-                        </li>
-
-                        <li>
-                            <i class="bi bi-check-circle-fill"></i>
-                            Asset feasibility analysis
-                        </li>
-
-                        <li>
-                            <i class="bi bi-check-circle-fill"></i>
-                            Property legality
-                        </li>
-
-                        <li>
-                            <i class="bi bi-check-circle-fill"></i>
-                            Asset utilization strategies
-                        </li>
-
-                        <li>
-                            <i class="bi bi-check-circle-fill"></i>
-                            Strategic Business and Management Consulting
-                        </li>
-
-                    </ul>
 
                 </div>
 
@@ -162,16 +75,10 @@ Hero Section
     </div>
 
     <!-- Scroll Indicator -->
-
-    <div class="hero__scroll">
-
+    <!-- <div class="hero__scroll">
         <span>Scroll Down</span>
-
         <div class="hero__scroll-line"></div>
-
-        <!-- <i class="bi bi-chevron-down"></i> -->
-
-    </div>
+    </div> -->
 
 </section>
 
@@ -552,7 +459,7 @@ Featured Properties
                         </h3>
 
 
-                        <p>
+                        <p class="featured-card__location">
 
                             <?= htmlspecialchars(
                                 $featured_first['city']
@@ -563,6 +470,25 @@ Featured Properties
 
                         </p>
 
+
+                        <?php if (
+                            isset($featured_first['price']) &&
+                            $featured_first['price'] !== '' &&
+                            $featured_first['price'] !== null
+                        ): ?>
+
+                            <div class="featured-card__price">
+
+                                Rp <?= number_format(
+                                    (float) $featured_first['price'],
+                                    0,
+                                    ',',
+                                    '.'
+                                ); ?>
+
+                            </div>
+
+                        <?php endif; ?>
 
                         <div class="featured-card__footer">
 
@@ -646,7 +572,7 @@ Featured Properties
                                 </h3>
 
 
-                                <p>
+                                <p class="featured-card__location">
 
                                     <?= htmlspecialchars(
                                         $featured['city']
@@ -656,6 +582,25 @@ Featured Properties
                                     ); ?>
 
                                 </p>
+
+                                <?php if (
+                                    isset($featured['price']) &&
+                                    $featured['price'] !== '' &&
+                                    $featured['price'] !== null
+                                ): ?>
+
+                                    <div class="featured-card__price">
+
+                                        Rp <?= number_format(
+                                            (float) $featured['price'],
+                                            0,
+                                            ',',
+                                            '.'
+                                        ); ?>
+
+                                    </div>
+
+                                <?php endif; ?>
 
 
                                 <div class="featured-card__footer">

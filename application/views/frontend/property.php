@@ -624,6 +624,25 @@ PROPERTY GRID
 
                                 </div>
 
+                                 <!-- PRICE -->
+                                <?php if (
+                                    isset($property['price']) &&
+                                    $property['price'] !== '' &&
+                                    $property['price'] !== null
+                                ): ?>
+
+                                    <div class="property-card__price">
+
+                                        Rp <?= number_format(
+                                            (float) $property['price'],
+                                            0,
+                                            ',',
+                                            '.'
+                                        ); ?>
+
+                                    </div>
+
+                                <?php endif; ?>
 
                                 <!-- FOOTER -->
 

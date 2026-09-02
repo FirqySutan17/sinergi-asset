@@ -157,10 +157,10 @@ PROPERTY DETAIL HEADER
                 <h1>
 
                     <?= htmlspecialchars(
-    $property['title'],
-    ENT_QUOTES,
-    'UTF-8'
-); ?>
+                        $property['title'],
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ); ?>
 
                 </h1>
 
@@ -208,6 +208,27 @@ PROPERTY DETAIL HEADER
                     </span>
 
                 </div>
+
+                <?php if (!empty($property['price'])): ?>
+
+                    <div class="property-detail-header__price">
+
+                        <!-- <span class="property-detail-header__price-label">
+                            Asking Price
+                        </span> -->
+
+                        <strong>
+                            Rp <?= number_format(
+                                (float) $property['price'],
+                                0,
+                                ',',
+                                '.'
+                            ); ?>
+                        </strong>
+
+                    </div>
+
+                <?php endif; ?>
 
             </div>
 

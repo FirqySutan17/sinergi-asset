@@ -1420,72 +1420,116 @@ textarea.property-form-control {
 
         </div>
 
+        <div class="row g-4">
+            <!-- LAND AREA -->
+            <div class="col-lg-3 col-md-6">
 
-        <!-- LAND AREA -->
+                <label class="property-form-label">
+                    Land Area
+                </label>
 
-        <div class="col-lg-4">
+                <div class="input-group flex-nowrap">
 
-            <label class="property-form-label">
+                    <input
+                        type="text"
+                        name="land_area"
+                        class="property-form-control"
+                        value="<?= htmlspecialchars(
+                            $property['land_area'] ?? ''
+                        ); ?>"
+                        placeholder="e.g. 4,800 m²">
 
-                Land Area
+                    <span class="input-group-text">
+                        m²
+                    </span>
 
-            </label>
+                </div>
 
-            <input
-                type="text"
-                name="land_area"
-                class="property-form-control"
-                value="<?= htmlspecialchars(
-                    $property['land_area'] ?? ''
-                ); ?>"
-                placeholder="e.g. 1,500 m²">
+            </div>
 
+
+            <!-- BUILDING AREA -->
+            <div class="col-lg-3 col-md-6">
+
+                <label class="property-form-label">
+                    Building Area
+                </label>
+
+                <div class="input-group flex-nowrap">
+
+                    <input
+                        type="text"
+                        name="building_area"
+                        class="property-form-control"
+                        value="<?= htmlspecialchars(
+                            $property['building_area'] ?? ''
+                        ); ?>"
+                        placeholder="e.g. 12,500 m²">
+
+                    <span class="input-group-text">
+                        m²
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- YEAR BUILT -->
+            <div class="col-lg-3 col-md-6">
+
+                <label class="property-form-label">
+                    Year Built
+                </label>
+
+                <input
+                    type="number"
+                    name="year_built"
+                    class="property-form-control"
+                    value="<?= htmlspecialchars(
+                        $property['year_built'] ?? ''
+                    ); ?>"
+                    placeholder="e.g. 2024"
+                    min="1900"
+                    max="2100">
+
+            </div>
+
+
+            <!-- PRICE -->
+            <div class="col-lg-3 col-md-6">
+
+                <label class="property-form-label">
+                    Price
+                </label>
+
+                <div class="input-group flex-nowrap">
+
+                    <span class="input-group-text">
+                        Rp
+                    </span>
+
+                    <input
+                        type="text"
+                        name="price"
+                        id="propertyPrice"
+                        class="property-form-control"
+                        value="<?= !empty($property['price'])
+                            ? number_format(
+                                (float)$property['price'],
+                                0,
+                                ',',
+                                '.'
+                            )
+                            : ''; ?>"
+                        placeholder="e.g. 25.000.000.000"
+                        inputmode="numeric"
+                        autocomplete="off">
+
+                </div>
+
+            </div>
         </div>
-
-
-        <!-- BUILDING AREA -->
-
-        <div class="col-lg-4">
-
-            <label class="property-form-label">
-
-                Building Area
-
-            </label>
-
-            <input
-                type="text"
-                name="building_area"
-                class="property-form-control"
-                value="<?= htmlspecialchars(
-                    $property['building_area'] ?? ''
-                ); ?>"
-                placeholder="e.g. 5,000 m²">
-
-        </div>
-
-
-        <!-- YEAR BUILT -->
-
-        <div class="col-lg-4">
-
-            <label class="property-form-label">
-
-                Year Built
-
-            </label>
-
-            <input
-                type="number"
-                name="year_built"
-                class="property-form-control"
-                value="<?= htmlspecialchars(
-                    $property['year_built'] ?? ''
-                ); ?>"
-                placeholder="e.g. 2024">
-
-        </div>
-
 
         <!-- FEATURED -->
 
@@ -2322,6 +2366,35 @@ textarea.property-form-control {
 
 $(document).ready(function () {
 
+    function formatPropertyPrice(value)
+    {
+        let digits =
+            String(value || '')
+                .replace(/\D/g, '');
+
+        if (!digits) {
+            return '';
+        }
+
+        return digits.replace(
+            /\B(?=(\d{3})+(?!\d))/g,
+            '.'
+        );
+    }
+
+
+    $('#propertyPrice').on(
+        'input',
+        function () {
+
+            this.value =
+                formatPropertyPrice(
+                    this.value
+                );
+
+        }
+    );
+
     const existingCover =
         $('.property-image-card.is-cover')
             .data('image-id');
@@ -2735,6 +2808,20 @@ $(document).ready(function () {
     $('#propertyEditForm').on(
         'submit',
         function () {
+
+            const priceInput =
+                document.getElementById(
+                    'propertyPrice'
+                );
+
+            if (priceInput) {
+
+                priceInput.value =
+                    priceInput.value
+                        .replace(/\./g, '')
+                        .replace(/\D/g, '');
+
+            }
 
             const input =
                 document.getElementById(

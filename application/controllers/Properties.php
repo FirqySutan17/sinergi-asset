@@ -139,6 +139,10 @@ class Properties extends CI_Controller
             $this->input->post('building_area', TRUE)
         );
 
+        $price = $this->_normalize_price(
+            $this->input->post('price', TRUE)
+        );
+
         $year_built = trim(
             $this->input->post('year_built', TRUE)
         );
@@ -196,6 +200,18 @@ class Properties extends CI_Controller
             );
 
             return redirect('properties/create');
+        }
+
+        if ($price === NULL || $price < 0) {
+
+            $this->session->set_flashdata(
+                'error',
+                'Please enter a valid property price.'
+            );
+
+            return redirect(
+                'properties/create'
+            );
         }
 
 
@@ -367,6 +383,11 @@ class Properties extends CI_Controller
             'building_area' =>
                 $building_area !== ''
                     ? $building_area
+                    : NULL,
+
+            'price' =>
+                $price !== NULL
+                    ? $price
                     : NULL,
 
             'year_built' =>
@@ -1229,6 +1250,10 @@ class Properties extends CI_Controller
             $this->input->post('building_area', TRUE)
         );
 
+        $price = $this->_normalize_price(
+            $this->input->post('price', TRUE)
+        );
+
         $year_built = trim(
             $this->input->post('year_built', TRUE)
         );
@@ -1288,6 +1313,18 @@ class Properties extends CI_Controller
             $this->session->set_flashdata(
                 'error',
                 'Please select a location.'
+            );
+
+            return redirect(
+                'properties/edit/' . $id
+            );
+        }
+
+        if ($price === NULL || $price < 0) {
+
+            $this->session->set_flashdata(
+                'error',
+                'Please enter a valid property price.'
             );
 
             return redirect(
@@ -1487,6 +1524,11 @@ class Properties extends CI_Controller
             'building_area' =>
                 $building_area !== ''
                     ? $building_area
+                    : NULL,
+
+            'price' =>
+                $price !== NULL
+                    ? $price
                     : NULL,
 
             'year_built' =>
@@ -2989,5 +3031,41 @@ class Properties extends CI_Controller
         ) {
             @unlink($path);
         }
+    }
+
+    /**
+     * ==========================================================
+     * NORMALIZE PROPERTY PRICE
+     * ==========================================================
+     */
+    private function _normalize_price($price)
+    {
+        if ($price === NULL) {
+            return NULL;
+        }
+
+        $price = trim((string) $price);
+
+        if ($price === '') {
+            return NULL;
+        }
+
+        /*
+        |----------------------------------------------------------------------
+        | Remove currency and thousand separators
+        | Example:
+        | Rp 5.000.000.000
+        | 5.000.000.000
+        | 5000000000
+        |----------------------------------------------------------------------
+        */
+
+        $price = preg_replace('/[^0-9]/', '', $price);
+
+        if ($price === '') {
+            return NULL;
+        }
+
+        return (float) $price;
     }
 }

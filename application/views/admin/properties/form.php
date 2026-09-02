@@ -1337,10 +1337,8 @@ textarea.property-form-control {
 
     <div class="row g-4">
 
-
         <!-- LAND AREA -->
-
-        <div class="col-lg-4">
+        <div class="col-lg-3 col-md-6">
 
             <label class="property-form-label">
                 Land Area
@@ -1366,8 +1364,7 @@ textarea.property-form-control {
 
 
         <!-- BUILDING AREA -->
-
-        <div class="col-lg-4">
+        <div class="col-lg-3 col-md-6">
 
             <label class="property-form-label">
                 Building Area
@@ -1393,8 +1390,7 @@ textarea.property-form-control {
 
 
         <!-- YEAR BUILT -->
-
-        <div class="col-lg-4">
+        <div class="col-lg-3 col-md-6">
 
             <label class="property-form-label">
                 Year Built
@@ -1407,6 +1403,33 @@ textarea.property-form-control {
                 placeholder="e.g. 2024"
                 min="1900"
                 max="2100">
+
+        </div>
+
+
+        <!-- PRICE -->
+        <div class="col-lg-3 col-md-6">
+
+            <label class="property-form-label">
+                Price
+            </label>
+
+            <div class="input-group">
+
+                <span class="input-group-text">
+                    Rp
+                </span>
+
+                <input
+                    type="text"
+                    name="price"
+                    id="propertyPrice"
+                    class="property-form-control"
+                    placeholder="e.g. 25.000.000.000"
+                    inputmode="numeric"
+                    autocomplete="off">
+
+            </div>
 
         </div>
 
@@ -1995,6 +2018,44 @@ textarea.property-form-control {
         $(this).val('');
 
     });
+
+    function formatPropertyPrice(value)
+    {
+        let digits =
+            String(value || '')
+                .replace(/\D/g, '');
+
+        if (!digits) {
+            return '';
+        }
+
+        return digits.replace(
+            /\B(?=(\d{3})+(?!\d))/g,
+            '.'
+        );
+    }
+
+
+    $('#propertyPrice').on(
+        'input',
+        function () {
+
+            const cursorPosition =
+                this.selectionStart;
+
+            const oldValue =
+                this.value;
+
+            const formatted =
+                formatPropertyPrice(
+                    oldValue
+                );
+
+            this.value =
+                formatted;
+
+        }
+    );
 
 
     function renderImages() {
@@ -2790,6 +2851,24 @@ textarea.property-form-control {
             $('#coverIndex').val(
                 getCoverIndex()
             );
+
+            /* ==================================================
+            PROPERTY PRICE
+            ================================================== */
+
+            const priceInput =
+                document.getElementById(
+                    'propertyPrice'
+                );
+
+            if (priceInput) {
+
+                priceInput.value =
+                    priceInput.value
+                        .replace(/\./g, '')
+                        .replace(/\D/g, '');
+
+            }
 
 
             /* ==================================================
